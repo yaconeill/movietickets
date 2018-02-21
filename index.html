@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Rating</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="css/simplePagination.css" />
+    <link rel="stylesheet" href="css/index.css">
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery.simplePagination.js"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="logo my-2">
+            <img src="img/black_logo.png" id="bk-logo" alt="">
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarColor01">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home
+                        <span class="sr-only">(current page)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="pages/results.html">Chart results</a>
+                </li>
+            </ul>
+            <div class="form-inline my-2 user my-lg-0">
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="jumbotron">
+            <h1 class="display-3" role="heading" aria-level="1" tabindex="0">
+                <img src="img/logo.png" id="red-logo" alt=""> Catalog</h1>
+            <p class="lead" tabindex="0">Choose from our catalog to determine which is the best Marvel comic and character</p>
+            <a href="javascript:" id="return-to-top">
+                <i class="icon-chevron-up"></i>
+            </a>
+            <hr class="my-4">
+            <!-- <hr class="my-4"> -->
+            <div class="moviesCatalog" aria-level="3" aria-label="Panel de películas" tabindex="0"></div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="details" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <form id="register" action="pages/results.html">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Details</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <img class="modal-content" id="">
+                                </div>
+                                <div class="col-md-8 filmDetails"></div>
+                            </div>
+                        </div>
+                        <div class="form-group text-center">
+                            <p>
+                                <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Mostrar sinopsis</a>
+                            </p>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="collapse multi-collapse" id="multiCollapseExample1">
+                                        <div class="card card-body">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="my-4">
+                            <!-- <div class="vote-form">
+                                <div class="col-md-10" aria-label="En el siguiente formulario todos los datos son obligatorios">
+                                    <p class="h5 text-center mb-4">To vote fill out the form for a chance to Win Two Movie Tickets!</p>
+                                    <div class="md-form">
+                                        <i class="fa fa-user prefix grey-text"></i>
+                                        <input type="text" id="orangeForm-name" class="form-control" autocomplete='name' id="name" aria-label="Escribir nombre" aria-required="true"
+                                            required>
+                                        <label for="orangeForm-name">Your name</label>
+                                    </div>
+                                    <div class="md-form">
+                                        <i class="fa fa-envelope prefix grey-text"></i>
+                                        <input type="text" id="orangeForm-email" class="form-control" autocomplete='email' id="email" aria-label="Escribir correo electrónico"
+                                            aria-required="true" required>
+                                        <label for="orangeForm-email">Your email</label>
+                                    </div>
+                                    <div class="md-form">
+                                        <i class="fa fa-lock prefix grey-text"></i>
+                                        <input type="tel" id="orangeForm-pass" class="form-control" autocomplete='tel-national' maxlength="9" pattern="[0-9]{9}"
+                                            id="phone" aria-label="Escribir número de teléfono" required>
+                                        <label for="orangeForm-pass">Your telephone</label>
+                                    </div>
+                                </div>
+                            </div> -->
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+                            <button type="submit" id="vote" class="btn btn-success">Comprar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--Footer-->
+    <footer class="footer">
+        by Aymedicoán Mauleón Quintana
+        <!--/.Copyright-->
+    </footer>
+    <!--/.Footer-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/index.js"></script>
+</body>
+
+</html>
