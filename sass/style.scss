@@ -2,8 +2,9 @@ body {
     font-size: 1rem;
     background-attachment: fixed;
 }
+
 .logo img {
-    height: 35px; 
+    height: 35px;
     margin-right: 15px;
 }
 
@@ -36,4 +37,24 @@ body {
             color: white !important;
         }
     }
+}
+
+#zoom {
+    transform: rotate(90deg) translate(-200px, -450px);
+}
+
+.noSelected {
+    fill: white !important;
+}
+
+.selected {
+    fill: #1ca81c !important;
+}
+
+.unavailable {
+    fill: red;
+}
+
+path {
+    fill: inherit;
 }

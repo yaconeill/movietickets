@@ -34,3 +34,20 @@ body {
     color: white !important; }
     .footer a:visited, .footer a:link, .footer a:hover, .footer aactive {
       color: white !important; }
+
+#zoom {
+  -webkit-transform: rotate(90deg) translate(-200px, -450px);
+  -ms-transform: rotate(90deg) translate(-200px, -450px);
+  transform: rotate(90deg) translate(-200px, -450px); }
+
+.noSelected {
+  fill: white !important; }
+
+.selected {
+  fill: #1ca81c !important; }
+
+.unavailable {
+  fill: red; }
+
+path {
+  fill: inherit; }

@@ -59,7 +59,7 @@
     <div class="modal fade" id="details" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
-                <form id="register" action="pages/results.html">
+                <form id="register" action="pages/movieDetails.html">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Details</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -76,8 +76,47 @@
                             </div>
                         </div>
                         <div class="form-group text-center">
-                            <p>
+                            <div id="accordion">
+                                <div class="card">
+                                    <div class="card-header" id="headingOne">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false"
+                                                aria-controls="collapseOne">
+                                                Sinopsis
+                                            </button>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                        <div class="card-body plot">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-header" id="Mostrarhorario">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false"
+                                                aria-controls="collapseTwo">
+                                                Horarios
+                                            </button>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseTwo" class="collapse" aria-labelledby="Mostrar horario" data-parent="#accordion">
+                                        <div class="card-body schedule">
+                                            <table class="table table-hover table-sm">
+                                                <thead>
+                                                    <tr class="weekDays">
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="days">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <p>
                                 <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Mostrar sinopsis</a>
+                                <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Mostrar horario</a>
                             </p>
                             <div class="row">
                                 <div class="col">
@@ -86,7 +125,13 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                                <div class="col">
+                                    <div class="collapse multi-collapse" id="multiCollapseExample1">
+                                        <div class="card card-body">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
                             <hr class="my-4">
                             <!-- <div class="vote-form">
                                 <div class="col-md-10" aria-label="En el siguiente formulario todos los datos son obligatorios">

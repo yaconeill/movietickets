@@ -167,22 +167,57 @@ $(document)
             let btnVote = $('#vote');
             var button = $(event.relatedTarget); // Button that triggered the modal
             var dataId = button.data('card').split('-')[1]; // Extract info from data-card attributes
-            movieList.map(e => {
+            modal.find('.weekDays').children().remove();
+            modal.find('.days').children().remove();
+            let daysOfWeek = sortDays();
+            let j = 0;
+            movieList.forEach(e => {
                 if (e.id == dataId) {
                     modal.find('img').attr('src', e.poster).attr('id', dataId);
                     modal.find('.modal-title').text(e.title);
-                    modal.find('.card-body').text(e.plot);
+                    modal.find('.plot').text(e.plot);
                     modal.find('.filmDetails').children().remove();
                     modal.find('.filmDetails').append(`
                     <h4>Información</h4>
-                    <p>Título: ${e.title}</p>
-                    <p>País: ${e.country}</p>
-                    <p>Genero: ${e.genre}</p>
-                    <p>Duración: ${e.duration} minutos</p>
-                    <p>Estudio: ${e.studio}</p>`);
+                    <span class="badge badge-warning">${e.class}</span>
+                    <span class="badge badge-dark">${e.duration}</span>`);
+                    e.genre.split(',').forEach(function (e) {
+                        modal.find('.filmDetails').append(`
+                    <span class="badge badge-danger">${e}</span>`);
+                    });
+                    modal.find('.filmDetails').append(`
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <p>Título</p>
+                            <p>País</p>
+                            <p>Estudio</p>
+                            <p>Reparto</p>
+                        </div>
+                        <div class="col-sm-10">
+                            <p>${e.title}</p>
+                            <p>${e.country}</p>
+                            <p>${e.studio}</p>
+                            <p>${e.cast}</p>
+                        </div>
+                    </div>`);
+                    // daysOfWeek.forEach((day) => {
+                    //     modal.find('.weekDays').append(`<th>${day}</th>`);
+                    //     modal.find('.days').append(`<tr class="table-light"></tr>`);
+                    //     for (let i = 0; i < e.schedule[day].length; i++) {
+                    //         modal.find('.table-light').eq(j).append(`<td>${e.schedule[day][i]}</td>`);
+                    //     }
+                    //     j++;
+                    // });
                 }
             });
         });
+
+        function sortDays() {
+            var daysOfWeek = ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'];
+            var today = new Date().getDay();
+            var sortedList = daysOfWeek.slice(today).concat(daysOfWeek.slice(0, today));
+            return sortedList;
+        }
 
         /**
          * It read the form and save the user data in case is a new user
@@ -243,7 +278,7 @@ $(document)
             localStorage.setItem('userList', JSON.stringify(userList));
             alert('Thanks for participate. You will be redirect in a few.');
             setTimeout(function () {
-                window.location.href = "pages/results.html";
+                window.location.href = "pages/movieDetails.html";
             }, 2000);
         }
     });

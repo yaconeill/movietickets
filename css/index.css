@@ -2,7 +2,6 @@
   height: 35px;
   margin-right: 15px; }
 
-.badge,
 .navbar.navbar-dark .breadcrumb .nav-item.active > .nav-link:hover,
 .navbar.navbar-dark .navbar-nav .nav-item.active > .nav-link:hover,
 .navbar.navbar-dark .navbar-toggler,
@@ -113,6 +112,9 @@ body {
 
 #details .filmDetails {
   font-size: 1.5em; }
+  #details .filmDetails p {
+    font-size: .8em;
+    text-align: justify; }
 
 #details img {
   width: 15rem; }
