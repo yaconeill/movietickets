@@ -43,6 +43,7 @@ $(document)
         var ellipsesText = "...";
         var moreText = "Mostrar sinopsis completa";
         var lessText = "Ocultar sinopsis completa";
+        const daysOfWeek = ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'];
         var userList = JSON.parse(localStorage.getItem('userList'));
         if (userList == null)
             userList = [];
@@ -169,7 +170,7 @@ $(document)
             var dataId = button.data('card').split('-')[1]; // Extract info from data-card attributes
             modal.find('.weekDays').children().remove();
             modal.find('.days').children().remove();
-            let daysOfWeek = sortDays();
+            let daysWeek = sortDays();
             let j = 0;
             movieList.forEach(e => {
                 if (e.id == dataId) {
@@ -200,23 +201,51 @@ $(document)
                             <p>${e.cast}</p>
                         </div>
                     </div>`);
-                    // daysOfWeek.forEach((day) => {
-                    //     modal.find('.weekDays').append(`<th>${day}</th>`);
-                    //     modal.find('.days').append(`<tr class="table-light"></tr>`);
-                    //     for (let i = 0; i < e.schedule[day].length; i++) {
-                    //         modal.find('.table-light').eq(j).append(`<td>${e.schedule[day][i]}</td>`);
-                    //     }
-                    //     j++;
-                    // });
+                    daysWeek.forEach((day) => {
+                        modal.find('.weekDays').append(`<th>${day}</th>`);
+                        for (let i = 0; i < 7; i++)
+                            modal.find('.days').append(`<tr class="table-light"></tr>`);
+                        for (let i = 0; i < e.schedule[day].length; i++, j++)
+                            modal.find('.table-light').eq(j).append(`<td>${e.schedule[day][i]}</td>`);
+                        j = 0;
+                    });
                 }
+            });
+            $('#schedule td').click((e) => {
+                $(this).find('td').map((idx, e) => e.removeAttribute('class', 'bg-info'));
+                e.currentTarget.setAttribute('class', 'bg-info');
+                let id = $(this).find('img').attr('id');
+                let hour = e.currentTarget.textContent;
+                let day = $(this).find('th').eq(e.currentTarget.cellIndex).text();
+                localStorage.setItem('selection', JSON.stringify({
+                    'id': id,
+                    'day': day,
+                    'hour': hour
+                }));
+                isThereTime(e.currentTarget.textContent, e, $(this));                
             });
         });
 
         function sortDays() {
-            var daysOfWeek = ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'];
             var today = new Date().getDay();
             var sortedList = daysOfWeek.slice(today).concat(daysOfWeek.slice(0, today));
             return sortedList;
+        }
+
+        function isThereTime(hour, evt, modal) {
+            let now = new Date();
+            let nowTime = now.getHours() + ':' + now.getMinutes();
+            let today = '1/1/1999 ';
+            if (new Date(today + '20:20') > new Date(today + hour)) {
+                movieList.forEach(e => {
+                    if (e.id == modal.find('img').attr('id'))
+                        if (modal.find('th').eq(evt.currentTarget.cellIndex).text() === daysOfWeek[now.getDay()]){
+                            // let celIdx = evt.currentTarget.cellIndex;
+                            // let rowIdx = evt.target.parentElement.rowIndex;
+                            // modal.find('tr').eq(rowIdx).children().eq(celIdx).unbind("click").removeClass('bg-info').addClass('bg-dark');
+                        }
+                });
+            }
         }
 
         /**

@@ -119,6 +119,12 @@ body {
 #details img {
   width: 15rem; }
 
+#details .bg-info {
+  color: #fff; }
+
+#details td:not(.bg-dark):hover {
+  cursor: pointer; }
+
 .footer {
   font-size: 1.8vmin;
   left: 0;

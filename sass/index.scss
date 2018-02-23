@@ -125,6 +125,12 @@ body {
     img {
         width: 15rem;
     }
+    .bg-info {
+        color: #fff;
+    }
+    td:not(.bg-dark):hover{
+        cursor: pointer;
+    }
 }
 
 .footer {
