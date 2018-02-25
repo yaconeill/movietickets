@@ -1,8 +1,11 @@
 .logo img {
-    height: 35px;
+    height: 5rem;
     margin-right: 15px;
+    margin-left: 15px;
 }
-
+.navbar{
+    padding: initial;
+}
 .navbar.navbar-dark .breadcrumb .nav-item.active>.nav-link:hover,
 .navbar.navbar-dark .navbar-nav .nav-item.active>.nav-link:hover,
 .navbar.navbar-dark .navbar-toggler,
@@ -16,7 +19,8 @@
 }
 
 #red-logo {
-    height: 75px;
+    height: 100px;
+    margin-bottom: .3em;
 }
 
 .navbar.navbar-dark form .form-control:focus {

@@ -8,6 +8,7 @@
     <title>Rating</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/qtip2/3.0.3/jquery.qtip.min.css" />
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
     <script src="https://yoannmoinet.github.io/nipplejs/javascripts/nipplejs.js"></script>
@@ -15,7 +16,11 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <a class="navbar-brand" title="Ir a inicio" href="../index.html" aria-label="Página de detalles de la película">Rating</a>
+        <div class="logo my-2">
+            <a title="Ir a inicio" href="../index.html" aria-label="Página de detalles de la película">
+                <img src="../resources/svg/Logo_tickets.svg" alt="">
+            </a>
+        </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01"
             aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -27,9 +32,6 @@
                     <a class="nav-link" href="../index.html">Inicio
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="results.html">Resultados de las votaciones</a>
-                </li>
             </ul>
 
             <div class="form-inline my-2 use class=" noSelected " class="noSelected "r my-lg-0">
@@ -38,383 +40,523 @@
     </nav>
     <div class="container">
         <div class="jumbotron">
-            <h1 role="heading" aria-level="1" class="display-3 title"></h1>
+            <h2 role="heading" aria-level="1" class="display-6 title">COMPRA Y RESERVA TUS ENTRADAS</h2>
             <hr class="my-4">
             <div class="row">
-                <div class="col-lg-4">
-                    <div id="movieDetails" tabindex=0 role="heading" aria-level="2">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div id="moviePoster" tabindex=0 role="heading" aria-level="2"></div>
+                        </div>
+                        <div class="col-md-4 details"></div>
+                        <div class="col-md-3 mx-auto" aria-level="3" tabindex="0">
+                            <div class="card border-danger mb-3 text-center">
+                                <div class="card-header">TOTAL</div>
+                                <div class="card-body">
+                                    <h4 class="card-title">
+                                        <span class="price">0</span> €</h4>
+                                    <p class="card-text">Impuestos incluidos</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="col-lg-12 text-center" aria-level="3" tabindex="0">
-                    <h2>Sinopsis</h2>
-                    <p class="sinopsis"></p>
                 </div>
             </div>
             <hr class="my-4">
-            <div id="section">
-                <!-- <div class="row">
-                    <div class="col-md-9 mx-auto"  tabindex=0 role="heading">
-                        <h2>Rellena el formulario para votar la mejor película y accede al sorteo de 2 entradas de cine</h2>
-                    </div>
-                </div> -->
-                <div class="row">
-                    <div class="col-md-7 mx-auto zoom_panel" aria-label="En el siguiente formulario todos los datos son obligatorios">
-                        <svg width="620" height="420" id="sala" viewBox="600 -80 2000 2600" style="background: #e52d27; background: -webkit-linear-gradient(to right, #e52d27, #b31217);
-                        background: linear-gradient(to right, #e52d27, #b31217);">
-                            <g>
-                                <use x="60" y="-1250" width="3000" xlink:href="#pantalla" />
-                                <g id="row1">
-                                    <!-- <use class="noSelected" y="150" x="0" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="150" x="150" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="150" x="300" width="128" height="128" xlink:href="#butaca" /> -->
-                                    <!-- <use class="noSelected" y="150" x="450" width="128" height="128" xlink:href="#butaca" /> -->
-                                    <use class="noSelected" y="150" x="600" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="150" x="750" width="128" height="128" xlink:href="#butaca" />
-                                    <!-- <use class="noSelected" y="150" x="900" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="150" x="1050" width="128" height="128" xlink:href="#butaca" /> -->
-                                    <use class="noSelected" y="150" x="1200" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="150" x="1350" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="150" x="1500" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="150" x="1650" width="128" height="128" xlink:href="#butaca" />
-                                    <!-- <use class="noSelected" y="150" x="1800" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="150" x="1950" width="128" height="128" xlink:href="#butaca" /> -->
-                                    <use class="noSelected" y="150" x="2100" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="150" x="2250" width="128" height="128" xlink:href="#butaca" />
-                                    <!-- <use class="noSelected" y="150" x="2400" width="128" height="128" xlink:href="#butaca" /> -->
-                                    <!-- <use class="noSelected" y="150" x="2550" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="150" x="2700" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="150" x="2850" width="128" height="128" xlink:href="#butaca" /> -->
-                                    <!-- <use class="noSelected" y="150" x="3000" width="128" height="128" xlink:href="#butaca" />             -->
-                                </g>
-                                <g id="row2">
-                                    <!-- <use class="noSelected" y="300" x="0" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="300" x="150" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="300" x="300" width="128" height="128" xlink:href="#butaca" /> -->
-                                    <!-- <use class="noSelected" y="300" x="450" width="128" height="128" xlink:href="#butaca" /> -->
-                                    <use class="noSelected" y="300" x="600" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="300" x="750" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="300" x="900" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="300" x="1050" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="300" x="1200" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="300" x="1350" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="300" x="1500" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="300" x="1650" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="300" x="1800" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="300" x="1950" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="300" x="2100" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="300" x="2250" width="128" height="128" xlink:href="#butaca" />
-                                    <!-- <use class="noSelected" y="300" x="2400" width="128" height="128" xlink:href="#butaca" /> -->
-                                    <!-- <use class="noSelected" y="300" x="2550" width="128" height="128" xlink:href="#butaca" /> -->
-                                    <use class="noSelected" y="300" x="2700" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="300" x="2850" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" class="noSelected" y="300" x="3000" width="128" height="128" xlink:href="#butaca" />
-                                </g>
-                                <g id="row3">
-                                    <!-- <use class="noSelected" y="450" x="0" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="450" x="150" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="450" x="300" width="128" height="128" xlink:href="#butaca" /> -->
-                                    <!-- <use class="noSelected" y="450" x="450" width="128" height="128" xlink:href="#butaca" /> -->
-                                    <use class="noSelected" y="450" x="600" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="450" x="750" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="450" x="900" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="450" x="1050" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="450" x="1200" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="450" x="1350" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="450" x="1500" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="450" x="1650" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="450" x="1800" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="450" x="1950" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="450" x="2100" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="450" x="2250" width="128" height="128" xlink:href="#butaca" />
-                                    <!-- <use class="noSelected" y="450" x="2400" width="128" height="128" xlink:href="#butaca" /> -->
-                                    <!-- <use class="noSelected" y="450" x="2550" width="128" height="128" xlink:href="#butaca" /> -->
-                                    <use class="noSelected" y="450" x="2700" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="450" x="2850" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="450" x="3000" width="128" height="128" xlink:href="#butaca" />
-                                </g>
-                                <g id="row4">
-                                    <!-- <use class="noSelected" y="600" x="0" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="600" x="150" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="600" x="300" width="128" height="128" xlink:href="#butaca" /> -->
-                                    <!-- <use class="noSelected" y="600" x="450" width="128" height="128" xlink:href="#butaca" /> -->
-                                    <use class="noSelected" y="600" x="600" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="600" x="750" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="600" x="900" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="600" x="1050" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="600" x="1200" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="600" x="1350" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="600" x="1500" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="600" x="1650" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="600" x="1800" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="600" x="1950" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="600" x="2100" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="600" x="2250" width="128" height="128" xlink:href="#butaca" />
-                                    <!-- <use class="noSelected" y="600" x="2400" width="128" height="128" xlink:href="#butaca" /> -->
-                                    <!-- <use class="noSelected" y="600" x="2550" width="128" height="128" xlink:href="#butaca" /> -->
-                                    <use class="noSelected" y="600" x="2700" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="600" x="2850" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="600" x="3000" width="128" height="128" xlink:href="#butaca" />
-                                </g>
-                                <g id="row5">
-                                    <use class="noSelected" y="750" x="0" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="750" x="150" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="750" x="300" width="128" height="128" xlink:href="#butaca" />
-                                    <!-- <use class="noSelected" y="750" x="450" width="128" height="128" xlink:href="#butaca" /> -->
-                                    <use class="noSelected" y="750" x="600" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="750" x="750" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="750" x="900" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="750" x="1050" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="750" x="1200" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="750" x="1350" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="750" x="1500" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="750" x="1650" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="750" x="1800" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="750" x="1950" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="750" x="2100" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="750" x="2250" width="128" height="128" xlink:href="#butaca" />
-                                    <!-- <use class="noSelected" y="750" x="2400" width="128" height="128" xlink:href="#butaca" /> -->
-                                    <!-- <use class="noSelected" y="750" x="2550" width="128" height="128" xlink:href="#butaca" /> -->
-                                    <use class="noSelected" y="750" x="2700" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="750" x="2850" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="750" x="3000" width="128" height="128" xlink:href="#butaca" />
-                                </g>
-                                <g id="row6">
-                                    <use class="noSelected" y="900" x="0" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="900" x="150" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="900" x="300" width="128" height="128" xlink:href="#butaca" />
-                                    <!-- <use class="noSelected" y="900" x="450" width="128" height="128" xlink:href="#butaca" /> -->
-                                    <use class="noSelected" y="900" x="600" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="900" x="750" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="900" x="900" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="900" x="1050" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="900" x="1200" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="900" x="1350" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="900" x="1500" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="900" x="1650" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="900" x="1800" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="900" x="1950" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="900" x="2100" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="900" x="2250" width="128" height="128" xlink:href="#butaca" />
-                                    <!-- <use class="noSelected" y="900" x="2400" width="128" height="128" xlink:href="#butaca" /> -->
-                                    <!-- <use class="noSelected" y="900" x="2550" width="128" height="128" xlink:href="#butaca" /> -->
-                                    <use class="noSelected" y="900" x="2700" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="900" x="2850" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="900" x="3000" width="128" height="128" xlink:href="#butaca" />
-                                </g>
-                                <g id="row7">
-                                    <use class="noSelected" y="1050" x="0" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1050" x="150" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1050" x="300" width="128" height="128" xlink:href="#butaca" />
-                                    <!-- <use class="noSelected" y="1050" x="450" width="128" height="128" xlink:href="#butaca" /> -->
-                                    <use class="noSelected" y="1050" x="600" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1050" x="750" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1050" x="900" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1050" x="1050" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1050" x="1200" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1050" x="1350" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1050" x="1500" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1050" x="1650" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1050" x="1800" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1050" x="1950" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1050" x="2100" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1050" x="2250" width="128" height="128" xlink:href="#butaca" />
-                                    <!-- <use class="noSelected" y="1050" x="2400" width="128" height="128" xlink:href="#butaca" /> -->
-                                    <!-- <use class="noSelected" y="1050" x="2550" width="128" height="128" xlink:href="#butaca" /> -->
-                                    <use class="noSelected" y="1050" x="2700" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1050" x="2850" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1050" x="3000" width="128" height="128" xlink:href="#butaca" />
-                                </g>
-                                <g id="row8">
-                                    <use class="noSelected" y="1200" x="0" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1200" x="150" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1200" x="300" width="128" height="128" xlink:href="#butaca" />
-                                    <!-- <use class="noSelected" y="1200" x="450" width="128" height="128" xlink:href="#butaca" /> -->
-                                    <use class="noSelected" y="1200" x="600" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1200" x="750" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1200" x="900" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1200" x="1050" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1200" x="1200" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1200" x="1350" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1200" x="1500" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1200" x="1650" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1200" x="1800" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1200" x="1950" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1200" x="2100" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1200" x="2250" width="128" height="128" xlink:href="#butaca" />
-                                    <!-- <use class="noSelected" y="1200" x="2400" width="128" height="128" xlink:href="#butaca" /> -->
-                                    <!-- <use class="noSelected" y="1200" x="2550" width="128" height="128" xlink:href="#butaca" /> -->
-                                    <use class="noSelected" y="1200" x="2700" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1200" x="2850" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1200" x="3000" width="128" height="128" xlink:href="#butaca" />
-                                </g>
-                                <g id="row9">
-                                    <use class="noSelected" y="1350" x="0" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1350" x="150" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1350" x="300" width="128" height="128" xlink:href="#butaca" />
-                                    <!-- <use class="noSelected" y="1350" x="450" width="128" height="128" xlink:href="#butaca" /> -->
-                                    <use class="noSelected" y="1350" x="600" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1350" x="750" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1350" x="900" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1350" x="1050" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1350" x="1200" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1350" x="1350" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1350" x="1500" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1350" x="1650" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1350" x="1800" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1350" x="1950" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1350" x="2100" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1350" x="2250" width="128" height="128" xlink:href="#butaca" />
-                                    <!-- <use class="noSelected" y="1350" x="2400" width="128" height="128" xlink:href="#butaca" /> -->
-                                    <!-- <use class="noSelected" y="1350" x="2550" width="128" height="128" xlink:href="#butaca" /> -->
-                                    <use class="noSelected" y="1350" x="2700" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1350" x="2850" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1350" x="3000" width="128" height="128" xlink:href="#butaca" />
-                                </g>
-                                <g id="row10">
-                                    <use class="noSelected" y="1500" x="0" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1500" x="150" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1500" x="300" width="128" height="128" xlink:href="#butaca" />
-                                    <!-- <use class="noSelected" y="1500" x="450" width="128" height="128" xlink:href="#butaca" /> -->
-                                    <use class="noSelected" y="1500" x="600" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1500" x="750" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1500" x="900" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1500" x="1050" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1500" x="1200" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1500" x="1350" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1500" x="1500" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1500" x="1650" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1500" x="1800" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1500" x="1950" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1500" x="2100" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1500" x="2250" width="128" height="128" xlink:href="#butaca" />
-                                    <!-- <use class="noSelected" y="1500" x="2400" width="128" height="128" xlink:href="#butaca" /> -->
-                                    <!-- <use class="noSelected" y="1500" x="2550" width="128" height="128" xlink:href="#butaca" /> -->
-                                    <use class="noSelected" y="1500" x="2700" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1500" x="2850" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1500" x="3000" width="128" height="128" xlink:href="#butaca" />
-                                </g>
-                                <g id="row11">
-                                    <use class="noSelected" y="1650" x="0" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1650" x="150" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1650" x="300" width="128" height="128" xlink:href="#butaca" />
-                                    <!-- <use class="noSelected" y="1650" x="450" width="128" height="128" xlink:href="#butaca" /> -->
-                                    <use class="noSelected" y="1650" x="600" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1650" x="750" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1650" x="900" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1650" x="1050" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1650" x="1200" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1650" x="1350" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1650" x="1500" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1650" x="1650" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1650" x="1800" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1650" x="1950" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1650" x="2100" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1650" x="2250" width="128" height="128" xlink:href="#butaca" />
-                                    <!-- <use class="noSelected" y="1650" x="2400" width="128" height="128" xlink:href="#butaca" /> -->
-                                    <!-- <use class="noSelected" y="1650" x="2550" width="128" height="128" xlink:href="#butaca" /> -->
-                                    <use class="noSelected" y="1650" x="2700" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1650" x="2850" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1650" x="3000" width="128" height="128" xlink:href="#butaca" />
-                                </g>
-                                <g id="row12">
-                                    <use class="noSelected" y="1800" x="0" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1800" x="150" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1800" x="300" width="128" height="128" xlink:href="#butaca" />
-                                    <!-- <use class="noSelected" y="1800" x="450" width="128" height="128" xlink:href="#butaca" /> -->
-                                    <use class="noSelected" y="1800" x="600" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1800" x="750" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1800" x="900" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1800" x="1050" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1800" x="1200" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1800" x="1350" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1800" x="1500" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1800" x="1650" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1800" x="1800" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1800" x="1950" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1800" x="2100" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1800" x="2250" width="128" height="128" xlink:href="#butaca" />
-                                    <!-- <use class="noSelected" y="1800" x="2400" width="128" height="128" xlink:href="#butaca" /> -->
-                                    <!-- <use class="noSelected" y="1800" x="2550" width="128" height="128" xlink:href="#butaca" /> -->
-                                    <use class="noSelected" y="1800" x="2700" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1800" x="2850" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1800" x="3000" width="128" height="128" xlink:href="#butaca" />
-                                </g>
-                                <g id="row13">
-                                    <use class="noSelected" y="1950" x="0" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1950" x="150" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1950" x="300" width="128" height="128" xlink:href="#butaca" />
-                                    <!-- <use class="noSelected" y="1950" x="450" width="128" height="128" xlink:href="#butaca" /> -->
-                                    <use class="noSelected" y="1950" x="600" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1950" x="750" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1950" x="900" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1950" x="1050" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1950" x="1200" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1950" x="1350" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1950" x="1500" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1950" x="1650" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1950" x="1800" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1950" x="1950" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1950" x="2100" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1950" x="2250" width="128" height="128" xlink:href="#butaca" />
-                                    <!-- <use class="noSelected" y="1950" x="2400" width="128" height="128" xlink:href="#butaca" /> -->
-                                    <!-- <use class="noSelected" y="1950" x="2550" width="128" height="128" xlink:href="#butaca" /> -->
-                                    <use class="noSelected" y="1950" x="2700" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1950" x="2850" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="1950" x="3000" width="128" height="128" xlink:href="#butaca" />
-                                </g>
-                                <g id="row14">
-                                    <use class="noSelected" y="2100" x="0" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="2100" x="150" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="2100" x="300" width="128" height="128" xlink:href="#butaca" />
-                                    <!-- <use class="noSelected" y="2100" x="450" width="128" height="128" xlink:href="#butaca" /> -->
-                                    <use class="noSelected" y="2100" x="600" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="2100" x="750" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="2100" x="900" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="2100" x="1050" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="2100" x="1200" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="2100" x="1350" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="2100" x="1500" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="2100" x="1650" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="2100" x="1800" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="2100" x="1950" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="2100" x="2100" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="2100" x="2250" width="128" height="128" xlink:href="#butaca" />
-                                    <!-- <use class="noSelected" y="2100" x="2400" width="128" height="128" xlink:href="#butaca" /> -->
-                                    <!-- <use class="noSelected" y="2100" x="2550" width="128" height="128" xlink:href="#butaca" /> -->
-                                    <use class="noSelected" y="2100" x="2700" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="2100" x="2850" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="2100" x="3000" width="128" height="128" xlink:href="#butaca" />
-                                </g>
-                                <g id="row15">
-                                    <use class="noSelected" y="2250" x="0" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="2250" x="150" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="2250" x="300" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="2250" x="450" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="2250" x="600" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="2250" x="750" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="2250" x="900" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="2250" x="1050" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="2250" x="1200" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="2250" x="1350" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="2250" x="1500" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="2250" x="1650" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="2250" x="1800" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="2250" x="1950" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="2250" x="2100" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="2250" x="2250" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="2250" x="2400" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="2250" x="2550" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="2250" x="2700" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="2250" x="2850" width="128" height="128" xlink:href="#butaca" />
-                                    <use class="noSelected" y="2250" x="3000" width="128" height="128" xlink:href="#butaca" />
-                                </g>
-                            </g>
+            <div class="jumbotron">
+                <div id="section">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <ul class="nav nav-tabs">
+                                <li class="nav-item">
+                                    <a class="nav-link disabled active show" data-toggle="tab" href="#tickets">Selecciona tus entradas</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link disabled" data-toggle="tab" href="#chooseSeat">Escoge tu lugar</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link disabled" data-toggle="tab" href="#payment">Haz tu pago</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link disabled" data-toggle="tab" href="#confirm">Confirma tu compra</a>
+                                </li>
+                            </ul>
+                            <div id="myTabContent" class="tab-content">
+                                <div class="tab-pane fade active show" id="tickets">
+                                    <h5 class="text-center">SELECCIONA CUÁNTAS ENTRADAS QUIERES</h5>
+                                    <p class="text-center">Se puede comprar como máximo 10 entradas por transacción.</p>
+                                    <div class="error"></div>
+                                    <div class="row text-center">
+                                        <div class="col-sm-9 offset-3">
+                                            <div class="row">
+                                                <div class="col-md-3 offset-2">CANTIDAD:</div>
+                                                <div class="col-md-2">PRECIO:</div>
+                                                <div class="col-md-2">SUBTOTAL:</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-9 offset-3 entradas">
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    <span>ADULTO</span>
+                                                </div>
+                                                <div class="col-md-3 adult">
+                                                    <button type="button" data-action="minus" class="btn btn-outline-secondary btn-circle btn-sm">-</button>
+                                                    <span class="amount">0</span>
+                                                    <button type="button" data-action="plus" class="btn btn-outline-danger  btn-circle btn-sm">+</button>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <p>8.20</p>
+                                                </div>
+                                                <div class="col-md-2 subtotal">
+                                                    <p>0</p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    <span>JOVEN</span>
+                                                </div>
+                                                <div class="col-md-3 young">
+                                                    <button type="button" data-action="minus" class="btn btn-outline-secondary btn-circle btn-sm">-</button>
+                                                    <span class="amount">0</span>
+                                                    <button type="button" data-action="plus" class="btn btn-outline-danger  btn-circle btn-sm">+</button>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <p>6.70</p>
+                                                </div>
+                                                <div class="col-md-2 subtotal">
+                                                    <p>0</p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    <span>NIÑO</span>
+                                                </div>
+                                                <div class="col-md-3 child">
+                                                    <button type="button" data-action="minus" class="btn btn-outline-secondary btn-circle btn-sm">-</button>
+                                                    <span class="amount">0</span>
+                                                    <button type="button" data-action="plus" class="btn btn-outline-danger  btn-circle btn-sm">+</button>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <p>6.20</p>
+                                                </div>
+                                                <div class="col-md-2 subtotal">
+                                                    <p>0</p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    <span>SENIOR</span>
+                                                </div>
+                                                <div class="col-md-3 senior">
+                                                    <button type="button" data-action="minus" class="btn btn-outline-secondary btn-circle btn-sm">-</button>
+                                                    <span class="amount">0</span>
+                                                    <button type="button" data-action="plus" class="btn btn-outline-danger  btn-circle btn-sm">+</button>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <p>6.70</p>
+                                                </div>
+                                                <div class="col-md-2 subtotal">
+                                                    <p>0</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4 offset-5">
+                                            <button type="button" class="btn btn-success" id="next">Elige un lugar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="chooseSeat">
+                                    <div class="col-md-8 mx-auto" aria-label="Elegir asiento en la sala">
+                                        <did class="row">
+                                            <div class="col-md-10 mx-auto">
+                                                <h5 class="text-center">Selecciona tus butacas</h5>
+                                                <p>Para cambiar tu lugar asignado da click en el butaca deseada.</p>
+                                                <div class="row">
+                                                    <div class="col-md-10 mx-auto">
+                                                        <svg width="450" height="30" id="legend" viewBox="450 140 2000 150">
+                                                            <use class="selected" y="150" x="600" width="128" height="128" xlink:href="#butaca" />
+                                                            <text style="transform:scale(4);" class="svgText" x="190" y="55" fill="#000">Su butaca</text>
+                                                            <use class="noSelected" data-butaca="" y="150" x="1200" width="128" height="128" xlink:href="#butaca" />
+                                                            <text style="transform:scale(4);" class="svgText" x="340" y="55" fill="#000">Disponible</text>
+                                                            <use class="unavailable" y="150" x="1800" width="128" height="128" xlink:href="#butaca" />
+                                                            <text style="transform:scale(4);" class="svgText" x="490" y="55" fill="#000">Vendido</text>
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </did>
+                                        <hr class="my-4">
+                                        <svg width="620" height="420" id="sala" viewBox="600 -80 2000 2600" style="background: #e52d27; background: -webkit-linear-gradient(to right, #e52d27, #b31217); background: linear-gradient(to right, #e52d27, #b31217);">
+                                            <use x="60" y="-1250" width="3000" xlink:href="#pantalla" />
+                                            <g id="rowNumber">
+                                                <text x="-100" y="250" class="fil2 fnt0">1</text>
+                                                <text x="-100" y="400" class="fil2 fnt0">2</text>
+                                                <text x="-100" y="550" class="fil2 fnt0">3</text>
+                                                <text x="-100" y="700" class="fil2 fnt0">4</text>
+                                                <text x="-100" y="850" class="fil2 fnt0">5</text>
+                                                <text x="-100" y="1000" class="fil2 fnt0">6</text>
+                                                <text x="-100" y="1150" class="fil2 fnt0">7</text>
+                                                <text x="-100" y="1300" class="fil2 fnt0">8</text>
+                                                <text x="-100" y="1450" class="fil2 fnt0">9</text>
+                                                <text x="-150" y="1600" class="fil2 fnt0">10</text>
+                                                <text x="-150" y="1750" class="fil2 fnt0">11</text>
+                                                <text x="-150" y="1900" class="fil2 fnt0">12</text>
+                                                <text x="-150" y="2050" class="fil2 fnt0">13</text>
+                                                <text x="-150" y="2200" class="fil2 fnt0">14</text>
+                                                <text x="-150" y="2350" class="fil2 fnt0">15</text>
 
-                        </svg>
-                        <button type="button" id="resetSala" class="btn btn-info">Reiniciar zoom</button>
-                        <input type="range" name="zoom" id="zoom" min="1000" step="100" max="2600" value="2600">
-                        <div id="zone_joystick"></div>
-                        <!-- <form id="register">
+                                                <text x="3200" y="250" class="fil2 fnt0">1</text>
+                                                <text x="3200" y="400" class="fil2 fnt0">2</text>
+                                                <text x="3200" y="550" class="fil2 fnt0">3</text>
+                                                <text x="3200" y="700" class="fil2 fnt0">4</text>
+                                                <text x="3200" y="850" class="fil2 fnt0">5</text>
+                                                <text x="3200" y="1000" class="fil2 fnt0">6</text>
+                                                <text x="3200" y="1150" class="fil2 fnt0">7</text>
+                                                <text x="3200" y="1300" class="fil2 fnt0">8</text>
+                                                <text x="3200" y="1450" class="fil2 fnt0">9</text>
+                                                <text x="3150" y="1600" class="fil2 fnt0">10</text>
+                                                <text x="3150" y="1750" class="fil2 fnt0">11</text>
+                                                <text x="3150" y="1900" class="fil2 fnt0">12</text>
+                                                <text x="3150" y="2050" class="fil2 fnt0">13</text>
+                                                <text x="3150" y="2200" class="fil2 fnt0">14</text>
+                                                <text x="3150" y="2350" class="fil2 fnt0">15</text>
+                                            </g>
+                                            <g id="seatNumber">
+                                                <text x="40" y="2470" class="fil2 fnt0">1</text>
+                                                <text x="190" y="2470" class="fil2 fnt0">2</text>
+                                                <text x="340" y="2470" class="fil2 fnt0">3</text>
+                                                <text x="490" y="2470" class="fil2 fnt0">4</text>
+                                                <text x="640" y="2470" class="fil2 fnt0">5</text>
+                                                <text x="780" y="2470" class="fil2 fnt0">6</text>
+                                                <text x="940" y="2470" class="fil2 fnt0">7</text>
+                                                <text x="1090" y="2470" class="fil2 fnt0">8</text>
+                                                <text x="1240" y="2470" class="fil2 fnt0">9</text>
+                                                <text x="1350" y="2470" class="fil2 fnt0">10</text>
+                                                <text x="1510" y="2470" class="fil2 fnt0">11</text>
+                                                <text x="1650" y="2470" class="fil2 fnt0">12</text>
+                                                <text x="1800" y="2470" class="fil2 fnt0">13</text>
+                                                <text x="1950" y="2470" class="fil2 fnt0">14</text>
+                                                <text x="2100" y="2470" class="fil2 fnt0">15</text>
+                                                <text x="2260" y="2470" class="fil2 fnt0">16</text>
+                                                <text x="2260" y="2470" class="fil2 fnt0">16</text>
+                                                <text x="2410" y="2470" class="fil2 fnt0">17</text>
+                                                <text x="2560" y="2470" class="fil2 fnt0">18</text>
+                                                <text x="2710" y="2470" class="fil2 fnt0">19</text>
+                                                <text x="2860" y="2470" class="fil2 fnt0">20</text>
+                                                <text x="3010" y="2470" class="fil2 fnt0">21</text>
+                                            </g>
+                                            <g>
+                                                <g id="row1">
+                                                    <use class="noSelected" data-butaca="5" y="150" x="600" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="6" y="150" x="750" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="9" y="150" x="1200" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="10" y="150" x="1350" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="11" y="150" x="1500" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="12" y="150" x="1650" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="15" y="150" x="2100" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="16" y="150" x="2250" width="128" height="128" xlink:href="#butaca" />
+                                                </g>
+                                                <g id="row2">
+                                                    <use class="noSelected" data-butaca="5" y="300" x="600" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="6" y="300" x="750" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="7" y="300" x="900" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="8" y="300" x="1050" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="9" y="300" x="1200" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="10" y="300" x="1350" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="11" y="300" x="1500" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="12" y="300" x="1650" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="13" y="300" x="1800" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="14" y="300" x="1950" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="15" y="300" x="2100" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="16" y="300" x="2250" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="19" y="300" x="2700" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="20" y="300" x="2850" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="21" y="300" x="3000" width="128" height="128" xlink:href="#butaca" />
+                                                </g>
+                                                <g id="row3">
+                                                    <use class="noSelected" data-butaca="5" y="450" x="600" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="6" y="450" x="750" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="7" y="450" x="900" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="8" y="450" x="1050" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="9" y="450" x="1200" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="10" y="450" x="1350" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="11" y="450" x="1500" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="12" y="450" x="1650" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="13" y="450" x="1800" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="14" y="450" x="1950" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="15" y="450" x="2100" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="16" y="450" x="2250" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="19" y="450" x="2700" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="20" y="450" x="2850" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="21" y="450" x="3000" width="128" height="128" xlink:href="#butaca" />
+                                                </g>
+                                                <g id="row4">
+                                                    <use class="noSelected" data-butaca="5" y="600" x="600" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="6" y="600" x="750" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="7" y="600" x="900" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="8" y="600" x="1050" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="9" y="600" x="1200" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="10" y="600" x="1350" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="11" y="600" x="1500" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="12" y="600" x="1650" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="13" y="600" x="1800" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="14" y="600" x="1950" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="15" y="600" x="2100" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="16" y="600" x="2250" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="19" y="600" x="2700" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="20" y="600" x="2850" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="21" y="600" x="3000" width="128" height="128" xlink:href="#butaca" />
+                                                </g>
+                                                <g id="row5">
+                                                    <use class="noSelected" data-butaca="1" y="750" x="0" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="2" y="750" x="150" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="3" y="750" x="300" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="5" y="750" x="600" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="6" y="750" x="750" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="7" y="750" x="900" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="8" y="750" x="1050" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="9" y="750" x="1200" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="10" y="750" x="1350" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="11" y="750" x="1500" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="12" y="750" x="1650" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="13" y="750" x="1800" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="14" y="750" x="1950" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="15" y="750" x="2100" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="16" y="750" x="2250" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="19" y="750" x="2700" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="20" y="750" x="2850" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="21" y="750" x="3000" width="128" height="128" xlink:href="#butaca" />
+                                                </g>
+                                                <g id="row6">
+                                                    <use class="noSelected" data-butaca="1" y="900" x="0" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="2" y="900" x="150" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="3" y="900" x="300" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="5" y="900" x="600" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="6" y="900" x="750" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="7" y="900" x="900" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="8" y="900" x="1050" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="9" y="900" x="1200" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="10" y="900" x="1350" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="11" y="900" x="1500" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="12" y="900" x="1650" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="13" y="900" x="1800" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="14" y="900" x="1950" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="15" y="900" x="2100" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="16" y="900" x="2250" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="19" y="900" x="2700" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="20" y="900" x="2850" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="21" y="900" x="3000" width="128" height="128" xlink:href="#butaca" />
+                                                </g>
+                                                <g id="row7">
+                                                    <use class="noSelected" data-butaca="1" y="1050" x="0" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="2" y="1050" x="150" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="3" y="1050" x="300" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="5" y="1050" x="600" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="6" y="1050" x="750" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="7" y="1050" x="900" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="8" y="1050" x="1050" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="9" y="1050" x="1200" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="10" y="1050" x="1350" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="11" y="1050" x="1500" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="12" y="1050" x="1650" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="13" y="1050" x="1800" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="14" y="1050" x="1950" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="15" y="1050" x="2100" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="16" y="1050" x="2250" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="19" y="1050" x="2700" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="20" y="1050" x="2850" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="21" y="1050" x="3000" width="128" height="128" xlink:href="#butaca" />
+                                                </g>
+                                                <g id="row8">
+                                                    <use class="noSelected" data-butaca="1" y="1200" x="0" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="2" y="1200" x="150" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="3" y="1200" x="300" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="5" y="1200" x="600" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="6" y="1200" x="750" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="7" y="1200" x="900" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="8" y="1200" x="1050" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="9" y="1200" x="1200" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="10" y="1200" x="1350" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="11" y="1200" x="1500" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="12" y="1200" x="1650" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="13" y="1200" x="1800" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="14" y="1200" x="1950" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="15" y="1200" x="2100" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="16" y="1200" x="2250" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="19" y="1200" x="2700" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="20" y="1200" x="2850" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="21" y="1200" x="3000" width="128" height="128" xlink:href="#butaca" />
+                                                </g>
+                                                <g id="row9">
+                                                    <use class="noSelected" data-butaca="1" y="1350" x="0" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="2" y="1350" x="150" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="3" y="1350" x="300" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="5" y="1350" x="600" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="6" y="1350" x="750" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="7" y="1350" x="900" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="8" y="1350" x="1050" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="9" y="1350" x="1200" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="10" y="1350" x="1350" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="11" y="1350" x="1500" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="12" y="1350" x="1650" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="13" y="1350" x="1800" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="14" y="1350" x="1950" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="15" y="1350" x="2100" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="16" y="1350" x="2250" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="19" y="1350" x="2700" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="20" y="1350" x="2850" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="21" y="1350" x="3000" width="128" height="128" xlink:href="#butaca" />
+                                                </g>
+                                                <g id="row10">
+                                                    <use class="noSelected" data-butaca="1" y="1500" x="0" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="2" y="1500" x="150" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="3" y="1500" x="300" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="5" y="1500" x="600" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="6" y="1500" x="750" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="7" y="1500" x="900" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="8" y="1500" x="1050" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="9" y="1500" x="1200" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="10" y="1500" x="1350" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="11" y="1500" x="1500" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="12" y="1500" x="1650" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="13" y="1500" x="1800" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="14" y="1500" x="1950" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="15" y="1500" x="2100" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="16" y="1500" x="2250" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="19" y="1500" x="2700" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="20" y="1500" x="2850" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="21" y="1500" x="3000" width="128" height="128" xlink:href="#butaca" />
+                                                </g>
+                                                <g id="row11">
+                                                    <use class="noSelected" data-butaca="1" y="1650" x="0" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="2" y="1650" x="150" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="3" y="1650" x="300" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="5" y="1650" x="600" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="6" y="1650" x="750" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="7" y="1650" x="900" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="8" y="1650" x="1050" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="9" y="1650" x="1200" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="10" y="1650" x="1350" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="11" y="1650" x="1500" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="12" y="1650" x="1650" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="13" y="1650" x="1800" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="14" y="1650" x="1950" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="15" y="1650" x="2100" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="16" y="1650" x="2250" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="19" y="1650" x="2700" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="20" y="1650" x="2850" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="21" y="1650" x="3000" width="128" height="128" xlink:href="#butaca" />
+                                                </g>
+                                                <g id="row12">
+                                                    <use class="noSelected" data-butaca="1" y="1800" x="0" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="2" y="1800" x="150" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="3" y="1800" x="300" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="5" y="1800" x="600" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="6" y="1800" x="750" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="7" y="1800" x="900" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="8" y="1800" x="1050" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="9" y="1800" x="1200" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="10" y="1800" x="1350" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="11" y="1800" x="1500" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="12" y="1800" x="1650" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="13" y="1800" x="1800" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="14" y="1800" x="1950" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="15" y="1800" x="2100" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="16" y="1800" x="2250" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="19" y="1800" x="2700" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="20" y="1800" x="2850" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="21" y="1800" x="3000" width="128" height="128" xlink:href="#butaca" />
+                                                </g>
+                                                <g id="row13">
+                                                    <use class="noSelected" data-butaca="1" y="1950" x="0" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="2" y="1950" x="150" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="3" y="1950" x="300" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="5" y="1950" x="600" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="6" y="1950" x="750" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="7" y="1950" x="900" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="8" y="1950" x="1050" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="9" y="1950" x="1200" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="10" y="1950" x="1350" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="11" y="1950" x="1500" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="12" y="1950" x="1650" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="13" y="1950" x="1800" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="14" y="1950" x="1950" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="15" y="1950" x="2100" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="16" y="1950" x="2250" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="19" y="1950" x="2700" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="20" y="1950" x="2850" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="21" y="1950" x="3000" width="128" height="128" xlink:href="#butaca" />
+                                                </g>
+                                                <g id="row14">
+                                                    <use class="noSelected" data-butaca="1" y="2100" x="0" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="2" y="2100" x="150" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="3" y="2100" x="300" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="5" y="2100" x="600" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="6" y="2100" x="750" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="7" y="2100" x="900" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="8" y="2100" x="1050" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="9" y="2100" x="1200" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="10" y="2100" x="1350" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="11" y="2100" x="1500" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="12" y="2100" x="1650" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="13" y="2100" x="1800" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="14" y="2100" x="1950" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="15" y="2100" x="2100" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="16" y="2100" x="2250" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="19" y="2100" x="2700" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="20" y="2100" x="2850" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="21" y="2100" x="3000" width="128" height="128" xlink:href="#butaca" />
+                                                </g>
+                                                <g id="row15">
+                                                    <use class="noSelected" data-butaca="1" y="2250" x="0" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="2" y="2250" x="150" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="3" y="2250" x="300" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="4" y="2250" x="450" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="5" y="2250" x="600" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="6" y="2250" x="750" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="7" y="2250" x="900" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="8" y="2250" x="1050" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="9" y="2250" x="1200" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="10" y="2250" x="1350" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="11" y="2250" x="1500" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="12" y="2250" x="1650" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="13" y="2250" x="1800" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="14" y="2250" x="1950" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="15" y="2250" x="2100" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="16" y="2250" x="2250" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="17" y="2250" x="2400" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="18" y="2250" x="2550" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="19" y="2250" x="2700" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="20" y="2250" x="2850" width="128" height="128" xlink:href="#butaca" />
+                                                    <use class="noSelected" data-butaca="21" y="2250" x="3000" width="128" height="128" xlink:href="#butaca" />
+                                                </g>
+                                            </g>
+
+                                        </svg>
+                                        <button type="button" id="resetSala" class="btn btn-info">Reiniciar zoom</button>
+                                        <input type="range" class="slider" name="zoom" id="zoom" min="1000" step="100" max="2600" value="2600">
+                                        <div id="zone_joystick"></div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="payment">
+
+                                </div>
+                                <div class="tab-pane fade" id="confirm">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="jumbotron zoom_panel" style="display: none;">
+                <div id="section">
+                    <div class="row">
+                        <div class="col-md-7 mx-auto" aria-label="Elegir asiento en la sala">
+                            
+                            <form id="register">
                             <div class="form-group">
                                 <label for="name">Nombre</label>
                                 <input type="text" class="form-control" id="name" aria-label="Escribir nombre" aria-required="true">
@@ -428,75 +570,76 @@
                                 <input type="email" class="form-control" id="email" aria-label="Escribir correo electrónico" aria-required="true">
                             </div>
                             <button type="submit" class="btn btn-primary" aria-label="Botón para registrar los datos y entrar en el sorteo">Enviar datos</button>
-                        </form> -->
+                        </form>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </div>-->
         </div>
-    </div>
-    <div style="display: none;">
-        <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="2000px" height="2000px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
-            viewBox="0 0 2000 2000" xmlns:xlink="http://www.w3.org/1999/xlink">
-            <defs>
-                <style type="text/css">
-                    .str0 {
-                        stroke: black;
-                        stroke-width: 45;
-                        stroke-miterlimit: 22.9256
-                    }
-                </style>
-            </defs>
-            <symbol id="butaca" viewBox="0 0 2000 2000">
-                <g>
-                    <path class="fil0 str0" fill="#fff" d="M115.59 60.728l194.445 0c42.778,0 77.778,35 77.778,77.778l0 1286.766 -350 0 0 -1286.766c0,-42.778 35,-77.778 77.777,-77.778z"
-                    />
-                    <path class="fil0 str0" fill="#fff" d="M1689.965 60.728l194.445 0c42.778,0 77.778,35 77.778,77.778l0 1286.766 -350 0 0 -1286.766c0,-42.778 34.999,-77.778 77.777,-77.778z"
-                    />
-                    <path class="fil0 str0" fill="#fff" d="M553.236 1537.522l893.528 0c90.983,0 165.424,-74.441 165.424,-165.424l0 -1058.15c0,-131.477 -107.571,-239.049 -239.048,-239.049l-746.279 0c-131.477,0 -239.048,107.572 -239.048,239.049l0 1058.15c0,90.983 74.44,165.424 165.423,165.424z"
-                    />
-                    <path class="fil0 str0" fill="#fff" d="M1612.188 1425.272c1.179,63.347 -74.461,103.934 -131.482,108.725 -60.498,5.083 -263.976,0.882 -454.893,3.525 -115.253,1.595 -229.38,0 -322.358,0 -110.469,0 -259.955,7 -315.642,-112.25 -160.365,0 -189.636,0 -350,0 0,283.8 430.924,514 962.187,514 531.263,0 962.188,-230.2 962.188,-514 -160.365,0 131.093,0 -350,0z"
-                    />
-                </g>
-            </symbol>
-        </svg>
-        <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="2100px" height="150px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
-            viewBox="0 0 2100 150" xmlns:xlink="http://www.w3.org/1999/xlink">
-            <defs>
-                <style type="text/css">
-                    .str0-s {
-                        stroke: black;
-                        stroke-width: 4;
-                        stroke-miterlimit: 22.9256;
-                    }
+        <div style="display: none;">
+            <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="2000px" height="2000px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+                viewBox="0 0 2000 2000" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <defs>
+                    <style type="text/css">
+                        .str0 {
+                            stroke: black;
+                            stroke-width: 45;
+                            stroke-miterlimit: 22.9256
+                        }
+                    </style>
+                </defs>
+                <symbol id="butaca" viewBox="0 0 2000 2000">
+                    <!-- <title>Butaca</title> -->
+                    <g>
+                        <path class="fil0 str0" fill="#fff" d="M115.59 60.728l194.445 0c42.778,0 77.778,35 77.778,77.778l0 1286.766 -350 0 0 -1286.766c0,-42.778 35,-77.778 77.777,-77.778z"
+                        />
+                        <path class="fil0 str0" fill="#fff" d="M1689.965 60.728l194.445 0c42.778,0 77.778,35 77.778,77.778l0 1286.766 -350 0 0 -1286.766c0,-42.778 34.999,-77.778 77.777,-77.778z"
+                        />
+                        <path class="fil0 str0" fill="#fff" d="M553.236 1537.522l893.528 0c90.983,0 165.424,-74.441 165.424,-165.424l0 -1058.15c0,-131.477 -107.571,-239.049 -239.048,-239.049l-746.279 0c-131.477,0 -239.048,107.572 -239.048,239.049l0 1058.15c0,90.983 74.44,165.424 165.423,165.424z"
+                        />
+                        <path class="fil0 str0" fill="#fff" d="M1612.188 1425.272c1.179,63.347 -74.461,103.934 -131.482,108.725 -60.498,5.083 -263.976,0.882 -454.893,3.525 -115.253,1.595 -229.38,0 -322.358,0 -110.469,0 -259.955,7 -315.642,-112.25 -160.365,0 -189.636,0 -350,0 0,283.8 430.924,514 962.187,514 531.263,0 962.188,-230.2 962.188,-514 -160.365,0 131.093,0 -350,0z"
+                        />
+                    </g>
+                </symbol>
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="2100px" height="150px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+                viewBox="0 0 2100 150" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <defs>
+                    <style type="text/css">
+                        .str0-s {
+                            stroke: black;
+                            stroke-width: 4;
+                            stroke-miterlimit: 22.9256;
+                        }
 
-                    .fil0-s {
-                        fill: wheat;
-                        fill-rule: nonzero
-                    }
+                        .fil0-s {
+                            fill: wheat;
+                            fill-rule: nonzero
+                        }
 
-                    .fil1-s {
-                        fill: black;
-                        fill-rule: nonzero
-                    }
-                </style>
-            </defs>
-            <symbol id="pantalla" viewBox="45 27.211 2010 92.866">
-                <path class="fil0-s str0-s" d="M2050 117.789c0,-28.526 -2000,-28.526 -2000,0 0,-21.395 0,-42.789 0,-64.184 0,-28.526 2000,-28.526 2000,0 0,21.395 0,42.789 0,64.184z"
-                />
-                <path class="fil1-s" d="M788.648 72.867l0 -28.64 9.273 0c3.514,0 5.8,0.14 6.867,0.427 1.64,0.433 3.013,1.366 4.12,2.806 1.107,1.44 1.66,3.301 1.66,5.58 0,1.761 -0.32,3.234 -0.953,4.434 -0.64,1.2 -1.447,2.14 -2.427,2.826 -0.98,0.68 -1.98,1.134 -2.993,1.354 -1.38,0.273 -3.374,0.413 -5.987,0.413l-3.76 0 0 10.8 -5.8 0zm5.8 -23.8l0 8.16 3.154 0c2.273,0 3.786,-0.153 4.553,-0.453 0.767,-0.3 1.366,-0.767 1.8,-1.414 0.433,-0.64 0.653,-1.38 0.653,-2.233 0,-1.047 -0.306,-1.906 -0.913,-2.586 -0.614,-0.681 -1.38,-1.107 -2.32,-1.281 -0.687,-0.126 -2.067,-0.193 -4.147,-0.193l-2.78 0zm89.278 23.8l-6.247 0 -2.473 -6.52 -11.487 0 -2.38 6.52 -6.133 0 11.12 -28.64 6.127 0 11.473 28.64zm-10.6 -11.36l-3.98 -10.6 -3.867 10.6 7.847 0zm59.251 11.36l0 -28.64 5.613 0 11.787 19.193 0 -19.193 5.36 0 0 28.64 -5.793 0 -11.607 -18.827 0 18.827 -5.36 0zm80.891 0l0 -23.8 -8.48 0 0 -4.84 22.72 0 0 4.84 -8.44 0 0 23.8 -5.8 0zm86.391 0l-6.247 0 -2.473 -6.52 -11.487 0 -2.38 6.52 -6.133 0 11.12 -28.64 6.127 0 11.473 28.64zm-10.6 -11.36l-3.98 -10.6 -3.867 10.6 7.847 0zm59.411 11.36l0 -28.4 5.8 0 0 23.56 14.36 0 0 4.84 -20.16 0zm69.998 0l0 -28.4 5.8 0 0 23.56 14.36 0 0 4.84 -20.16 0zm95.637 0l-6.246 0 -2.474 -6.52 -11.486 0 -2.38 6.52 -6.134 0 11.12 -28.64 6.127 0 11.473 28.64zm-10.6 -11.36l-3.98 -10.6 -3.867 10.6 7.847 0z"
-                />
-            </symbol>
-        </svg>
-    </div>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-    <script src="../js/data.js"></script>
-    <script src="../js/common.js"></script>
-    <script src="../js/details.js"></script>
+                        .fil1-s {
+                            fill: black;
+                            fill-rule: nonzero
+                        }
+                    </style>
+                </defs>
+                <symbol id="pantalla" viewBox="45 27.211 2010 92.866">
+                    <path class="fil0-s str0-s" d="M2050 117.789c0,-28.526 -2000,-28.526 -2000,0 0,-21.395 0,-42.789 0,-64.184 0,-28.526 2000,-28.526 2000,0 0,21.395 0,42.789 0,64.184z"
+                    />
+                    <path class="fil1-s" d="M788.648 72.867l0 -28.64 9.273 0c3.514,0 5.8,0.14 6.867,0.427 1.64,0.433 3.013,1.366 4.12,2.806 1.107,1.44 1.66,3.301 1.66,5.58 0,1.761 -0.32,3.234 -0.953,4.434 -0.64,1.2 -1.447,2.14 -2.427,2.826 -0.98,0.68 -1.98,1.134 -2.993,1.354 -1.38,0.273 -3.374,0.413 -5.987,0.413l-3.76 0 0 10.8 -5.8 0zm5.8 -23.8l0 8.16 3.154 0c2.273,0 3.786,-0.153 4.553,-0.453 0.767,-0.3 1.366,-0.767 1.8,-1.414 0.433,-0.64 0.653,-1.38 0.653,-2.233 0,-1.047 -0.306,-1.906 -0.913,-2.586 -0.614,-0.681 -1.38,-1.107 -2.32,-1.281 -0.687,-0.126 -2.067,-0.193 -4.147,-0.193l-2.78 0zm89.278 23.8l-6.247 0 -2.473 -6.52 -11.487 0 -2.38 6.52 -6.133 0 11.12 -28.64 6.127 0 11.473 28.64zm-10.6 -11.36l-3.98 -10.6 -3.867 10.6 7.847 0zm59.251 11.36l0 -28.64 5.613 0 11.787 19.193 0 -19.193 5.36 0 0 28.64 -5.793 0 -11.607 -18.827 0 18.827 -5.36 0zm80.891 0l0 -23.8 -8.48 0 0 -4.84 22.72 0 0 4.84 -8.44 0 0 23.8 -5.8 0zm86.391 0l-6.247 0 -2.473 -6.52 -11.487 0 -2.38 6.52 -6.133 0 11.12 -28.64 6.127 0 11.473 28.64zm-10.6 -11.36l-3.98 -10.6 -3.867 10.6 7.847 0zm59.411 11.36l0 -28.4 5.8 0 0 23.56 14.36 0 0 4.84 -20.16 0zm69.998 0l0 -28.4 5.8 0 0 23.56 14.36 0 0 4.84 -20.16 0zm95.637 0l-6.246 0 -2.474 -6.52 -11.486 0 -2.38 6.52 -6.134 0 11.12 -28.64 6.127 0 11.473 28.64zm-10.6 -11.36l-3.98 -10.6 -3.867 10.6 7.847 0z"
+                    />
+                </symbol>
+            </svg>
+        </div>
+        <script src="../js/jquery-3.3.1.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/qtip2/3.0.3/jquery.qtip.min.js"></script>
+        <script src="../js/data.js"></script>
+        <script src="../js/common.js"></script>
+        <script src="../js/details.js"></script>
 </body>
 
 </html>

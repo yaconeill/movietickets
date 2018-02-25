@@ -55,11 +55,17 @@ $(document)
         $search = $('.search');
         // $('body').css("background-image", "url(img/bg1.jpg");
 
+        movieList = JSON.parse(localStorage.getItem('movieList'));
+        if (movieList === null) {
+            localStorage.setItem('movieList', JSON.stringify(films));
+            movieList = films;
+        }
+
         /**
          * Checks if the user is logged.
          */
         isLogin();
-        printCards(films);
+        printCards(movieList);
 
         /**
          * Function to print the cards, that contains the information from the item, on the container
@@ -68,7 +74,6 @@ $(document)
          */
         function printCards(list) {
 
-            movieList = list;
             $divMovies.children().remove();
 
             if (list.length !== 0) {
@@ -124,14 +129,8 @@ $(document)
                     $(this).addClass("less");
                     $(this).html(lessText);
                 }
-                $(this)
-                    .parent()
-                    .prev()
-                    .toggle();
-                $(this)
-                    .prev()
-                    .toggle();
-                return false;
+                $(this).parent().prev().toggle();
+                $(this).prev().toggle();return false;
             });
         }
 
@@ -163,14 +162,15 @@ $(document)
         /**
          * It reads the data from the item, and these is shown in the modal
          */
-        $('#details').on('show.bs.modal', function (event) {
-            let modal = $(this);
+        $('#details').on('show.bs.modal', (event) => {
+            let modal = $('#details');
             let btnVote = $('#vote');
             var button = $(event.relatedTarget); // Button that triggered the modal
             var dataId = button.data('card').split('-')[1]; // Extract info from data-card attributes
             modal.find('.weekDays').children().remove();
             modal.find('.days').children().remove();
             let daysWeek = sortDays();
+            let nowTime;
             let j = 0;
             movieList.forEach(e => {
                 if (e.id == dataId) {
@@ -201,28 +201,52 @@ $(document)
                             <p>${e.cast}</p>
                         </div>
                     </div>`);
-                    daysWeek.forEach((day) => {
-                        modal.find('.weekDays').append(`<th>${day}</th>`);
+                    nowTime = new Date();
+                    day = nowTime.getDate();
+                    daysWeek.forEach((dw) => {
+                        switch ((nowTime.getMonth() + 1)) {
+                            case 4:
+                            case 6:
+                            case 9:
+                            case 11:
+                                if (day > 30)
+                                    day = 1;
+                                break;
+                            case 2:
+                                if (day > 28)
+                                    day = 1;
+                                break;
+                            default:
+                                if (day > 31)
+                                    day = 1;
+                                break;
+                        }
+                        modal.find('.weekDays').append(`<th>${dw} ${day}</th>`);
+                        day++;
+
                         for (let i = 0; i < 7; i++)
                             modal.find('.days').append(`<tr class="table-light"></tr>`);
-                        for (let i = 0; i < e.schedule[day].length; i++, j++)
-                            modal.find('.table-light').eq(j).append(`<td>${e.schedule[day][i]}</td>`);
+                        for (let i = 0; i < e.schedule[dw].length; i++, j++)
+                            modal.find('.table-light').eq(j).append(`<td>${e.schedule[dw][i]}</td>`);
                         j = 0;
                     });
                 }
             });
             $('#schedule td').click((e) => {
-                $(this).find('td').map((idx, e) => e.removeAttribute('class', 'bg-info'));
+                modal.find('td').map((idx, e) => e.removeAttribute('class', 'bg-info'));
                 e.currentTarget.setAttribute('class', 'bg-info');
-                let id = $(this).find('img').attr('id');
+                let id = modal.find('img').attr('id');
                 let hour = e.currentTarget.textContent;
-                let day = $(this).find('th').eq(e.currentTarget.cellIndex).text();
-                localStorage.setItem('selection', JSON.stringify({
+                let dayW = modal.find('th').eq(e.currentTarget.cellIndex).text().split(' ');
+                let month;
+
+                localStorage.setItem('selectedFilm', JSON.stringify({
                     'id': id,
-                    'day': day,
+                    'dayWeek': dayW[0],
+                    'day': dayW[1],
                     'hour': hour
                 }));
-                isThereTime(e.currentTarget.textContent, e, $(this));                
+                isThereTime(e.currentTarget.textContent, e, modal);
             });
         });
 
@@ -239,7 +263,7 @@ $(document)
             if (new Date(today + '20:20') > new Date(today + hour)) {
                 movieList.forEach(e => {
                     if (e.id == modal.find('img').attr('id'))
-                        if (modal.find('th').eq(evt.currentTarget.cellIndex).text() === daysOfWeek[now.getDay()]){
+                        if (modal.find('th').eq(evt.currentTarget.cellIndex).text() === daysOfWeek[now.getDay()]) {
                             // let celIdx = evt.currentTarget.cellIndex;
                             // let rowIdx = evt.target.parentElement.rowIndex;
                             // modal.find('tr').eq(rowIdx).children().eq(celIdx).unbind("click").removeClass('bg-info').addClass('bg-dark');

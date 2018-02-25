@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW 2017 -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="2000px" height="2000px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 2000 2000"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <font id="FontID0" horiz-adv-x="722" font-variant="normal" style="fill-rule:nonzero" font-weight="700">
+	<font-face 
+		font-family="Arial">
+		<font-face-src>
+			<font-face-name name="Arial Bold"/>
+		</font-face-src>
+	</font-face>
+   <missing-glyph><path d="M0 0z"/></missing-glyph>
+   <glyph unicode="1" horiz-adv-x="556" d="M393 0l-137 0 0 518.333c-50,-47.0001 -109,-81.8334 -177,-104.333l0 125c35.8333,11.6668 74.6668,33.8335 116.5,66.6666 41.9998,32.6667 70.6666,70.8335 86.3331,114.333l111.167 0 0 -720z"/>
+  </font>
+  <style type="text/css">
+   <![CDATA[
+    @font-face { font-family:"Arial";font-variant:normal;font-weight:bold;src:url("#FontID0") format(svg)}
+    .str0 {stroke:black;stroke-width:45;stroke-miterlimit:22.9256}
+    .fil0 {fill:none}
+    .fil1 {fill:none;fill-rule:nonzero}
+    .fil2 {fill:black}
+    .fnt0 {font-weight:bold;font-size:1333.334px;font-family:'Arial'}
+   ]]>
+  </style>
+ </defs>
+<symbol id="butaca" viewBox="15.313 38.228 1969.375 1923.543">
+ <path class="fil0 str0" d="M115.59 60.728l194.445 0c42.778,0 77.778,35 77.778,77.778l0 1286.766 -350 0 0 -1286.766c0,-42.778 35,-77.778 77.777,-77.778z"/>
+ <path class="fil0 str0" d="M1689.965 60.728l194.445 0c42.778,0 77.778,35 77.778,77.778l0 1286.766 -350 0 0 -1286.766c0,-42.778 34.999,-77.778 77.777,-77.778z"/>
+ <path class="fil0 str0" d="M553.236 1537.522l893.528 0c90.983,0 165.424,-74.441 165.424,-165.424l0 -1058.15c0,-131.477 -107.571,-239.049 -239.048,-239.049l-746.279 0c-131.477,0 -239.048,107.572 -239.048,239.049l0 1058.15c0,90.983 74.44,165.424 165.423,165.424z"/>
+ <path class="fil1 str0" d="M1612.188 1425.272c1.179,63.347 -74.461,103.934 -131.482,108.725 -60.498,5.083 -263.976,0.882 -454.893,3.525 -115.253,1.595 -229.38,0 -322.358,0 -110.469,0 -259.955,7 -315.642,-112.25 -160.365,0 -189.636,0 -350,0 0,283.8 430.924,514 962.187,514 531.263,0 962.188,-230.2 962.188,-514 -160.365,0 131.093,0 -350,0z"/>
+ <text x="685.333" y="1286.211"  class="fil2 fnt0">1</text>
+</symbol>
+ <g id="Capa_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <use transform="scale(0.971267 0.971267)" x="44.896" y="67.811" width="1969.375" height="1923.543" xlink:href="#butaca"/>
+ </g>
+</svg>

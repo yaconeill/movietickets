@@ -1,10 +1,141 @@
 $(document).ready(function () {
+    User = function (name, phone, email, tickets, costs, seats, selectedFilmId, filmTitle) {
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.tickets = tickets;
+        this.costs = costs;
+        this.seats = seats;
+        this.selectedFilmId = selectedFilmId;
+        this.filmTitle = filmTitle;
+    }
+    var Prices = {
+        'adult': 8.2,
+        'young': 6.7,
+        'child': 6.2,
+        'senior': 6.7
+    };
+    // isLogin();
+    // var userName = localStorage.getItem('currentUser');
+    var $section = $('#section');
+    // isNewUser(userName, $section);
+    var userList = JSON.parse(localStorage.getItem('userList'));
+    if (userList == null)
+        userList = [];
+    var selectedFilm = JSON.parse(localStorage.getItem('selectedFilm'));
+    var movieList = JSON.parse(localStorage.getItem('movieList'));
+    var seatSelection = $('.zoom_panel');
+    seatSelection.hide();
+    var $totalPrice = $('.price');
+    var $film = $(this).prev().attr('id');
+    var $film = $(this).attr('id');
+
+    var $moviePoster = $('#moviePoster');
+    var tmpFilm;
+    var title;
+    movieList.find(o => {
+        if (o.id === selectedFilm.id) {
+            tmpFilm = o;
+            title = o.title;
+        }
+    });
+
+    var newUser = new User('tempUser', '', '', 0, 0, '', selectedFilm, title);
+    
+    $('.jumbotron').css('opacity', '0.9');
+    $moviePoster.children().remove();
+    $moviePoster.append($('<div class="film">'));
+    $('.title').text(tmpFilm.name);
+    $moviePoster.children('div').append(
+        $(`<img src="../${tmpFilm.poster}" title="${tmpFilm.title}" 
+        alt="${tmpFilm.title}" id="${tmpFilm.id}"/>`));
+    $('.details').append(`
+    <h2>Detalles</h2>    
+    <div class="row">
+        <div class="col-sm-5">
+            <p>Película</p>
+            <p>Fecha</p>
+            <p>Función</p>
+        </div>
+        <div class="col-sm-7">
+            <p>${tmpFilm.title}</p>
+            <p>${selectedFilm.dayWeek} ${selectedFilm.day}</p>
+            <p>${selectedFilm.hour}</p>
+        </div>
+    </div>`);
+
+    //#region - select tickets
+    var $ticketSelection = $('.entradas');
+    let $buttons = $ticketSelection.find('button');
+    $buttons.on('click', function () {
+        let total = 0;
+        let subTotal;
+        let span = $(this).closest('div').find('span');
+        let value = parseInt(span.text());
+        let type = $(this).closest('div').attr('class').split(' ')[1];
+        let price = Prices[type];
+        if ($(this).data('action') === 'plus') {
+            value++;
+            if (value <= 10) {
+                span.text(value);
+                subTotal = roundPrice((price * value));
+                $(this).closest('.row').find('p').last().text(subTotal);
+            }
+        } else {
+            value--;
+            if (value >= 0) {
+                span.text(value);
+                subTotal = roundPrice((price * value));
+                $(this).closest('.row').find('p').last().text(subTotal);
+            }
+        }
+        $('.subtotal p').each(function () {
+            total += parseFloat($(this).text());
+        });
+        $totalPrice.text(roundPrice(total));
+        newUser.costs = total;
+    });
+
+    function roundPrice(value) {
+
+        return Math.round((value + 0.00001) * 100) / 100;
+    }
+
+    $('#next').on('click', function(){
+        let tickets = 0;
+        $('.amount').each(function () {
+            tickets += parseInt($(this).text());
+        });
+        if (tickets > 10){
+            $('.error').append(`
+            <div class="alert alert-danger" role="alert">
+                Por favor seleccione como máximo 10 lugares.
+            </div>
+            `);
+        }else{
+            newUser.tickets = tickets;
+            userList.push(newUser);
+            localStorage.setItem('userList', JSON.stringify(userList));
+            $('.alert').alert('close');
+            $('a[href="#chooseSeat"]').removeClass('disabled').tab('show').addClass('disabled');
+        }
+    });
+
+    //#endregion
+
+    //#region - sala svg
     let $sala = $('#sala');
-    $('use').on('click', function () {
+    $sala.find('use').on('click', () => {
         if ($(this).hasClass('noSelected'))
             $(this).removeClass('noSelected').addClass('selected');
         else
             $(this).removeClass('selected').addClass('noSelected');
+    });
+
+    $('g use').hover(function () {
+        $(this).css('cursor', 'pointer').attr('title', 'This is a hover text.');
+    }, function () {
+        $(this).css('cursor', 'auto');
     });
 
     $('#resetSala').click(() => {
@@ -20,9 +151,9 @@ $(document).ready(function () {
         $sala.attr('viewBox', `${prevVB[0]} ${prevVB[1]} ${prevVB[2]} ${prevVB[3]}`);
     });
 
-    var s = function(sel) {
+    var s = function (sel) {
         return document.querySelector(sel);
-      };
+    };
 
     var radius = 100;
     var sampleJoystick = {
@@ -47,11 +178,9 @@ $(document).ready(function () {
         'plain:down dir:right plain:right',
         function (evt, data) {
             position = data;
-            // moveAround(position);
         }
     ).on('pressure', function (evt, data) {
         position = data;
-        // moveAround(position);
 
     });
 
@@ -61,88 +190,23 @@ $(document).ready(function () {
         let valueY = 0;
         if (data.direction !== undefined) {
             if (data.direction.x === 'right') {
-                valueX = -10;
-            } else {
                 valueX = 10;
+            } else {
+                valueX = -10;
             }
             if (data.direction.y === 'up') {
-                valueY = 10;
-            } else {
                 valueY = -10;
+            } else {
+                valueY = 10;
             }
         }
-
-
         prevVB[0] = parseInt(prevVB[0]) + valueX;
         prevVB[1] = parseInt(prevVB[1]) + valueY;
         $sala.attr('viewBox', `${prevVB[0]} ${prevVB[1]} ${prevVB[2]} ${prevVB[3]}`);
     }
+    //#endregion
 });
-// var deltaX = 0;
-// var deltaY = 0;
-// var scale = 1.0;
 
-// var drag = {
-//   elem: null,
-//   x: 0,
-//   y: 0,
-//   state: false
-// };
-// var delta = {
-//   x: 0,
-//   y: 0
-// };
-// var currentX = 0,
-//   currentY = 0;
-// var currentdx = 201.70001220703125,
-//   currentdy = 36.69999694824219;
-// var previousdx = 0,
-//   previousdy = 0;
-
-// $('.zoom_panel').mousedown(function(e) {
-//   if (!drag.state && e.which == 1) {
-//     drag.elem = $('#sala');
-//     drag.state = true;
-//     currentX = e.offsetX;
-//     currentY = e.offsetY;
-//   }
-//   return false;
-// });
-
-
-// $('.zoom_panel').mousemove(function(e) {
-//   if (drag.state) {
-//     var attrs = $(drag.elem).attr('viewBox').split(' ');
-//     dx = e.offsetX - currentX + currentdx;
-//     dy = e.offsetY - currentY + currentdy;
-//     newMatrix = `${dx/2} ${dy/2} ${attrs[2]} ${attrs[3]}`;// 'viewBox(' + (dx) + ',' + (dy) + ') ' +  + ;
-//     previousdx = dx;
-//     previousdy = dy;
-//     $(drag.elem).attr('viewBox', newMatrix);
-
-//   }
-// });
-// $('.zoom_panel').mouseup(function() {
-//   if (drag.state) {
-//     drag.state = false;
-//     currentdx = previousdx;
-//     currentdy = previousdy;
-//   }
-// });
-
-// $('.zoom_panel').on('contextmenu', function() {
-//   return false;
-// });
-// $('.zoom_panel').addClass('active');
-
-// var use = document.getElementsByClassName('butaca');
-// for (let i = 0; i < use.length; i++) {
-//     use[i].addEventListener('click', () => {
-//         if (this.getAttribute('class') === 'noSelected')
-//             alert(this);
-//     }, false);
-
-// }
 // User = function (name, phone, email, selectedFilmId) {
 //     this.name = name;
 //     this.phone = phone;
@@ -158,7 +222,7 @@ $(document).ready(function () {
 //     userList = [];
 
 // var selectedFilm = localStorage.getItem('selectedFilm');
-// var filmCatalog = JSON.parse(localStorage.getItem('rating'));
+// var movieList = JSON.parse(localStorage.getItem('rating'));
 
 
 // var $film = $(this).prev().attr('id');
@@ -167,7 +231,7 @@ $(document).ready(function () {
 // var $movieDetails = $('#movieDetails');
 // var tmpFilm;
 // var url;
-// filmCatalog.find(o => {
+// movieList.find(o => {
 //     if (o.id === selectedFilm) {
 //         tmpFilm = o;
 //         // url = o.img;
@@ -212,7 +276,7 @@ $(document).ready(function () {
 //     if (userList.find(o => o.selectedFilm == null) != null) {
 //         let filmClickId = $('img').attr('id');
 //         let film;
-//         filmCatalog.find(o => {
+//         movieList.find(o => {
 //             if (o.id === filmClickId) {
 //                 o.rate += 1;
 //                 film = o.name;
@@ -223,7 +287,7 @@ $(document).ready(function () {
 //                 o.selectedFilm = filmClickId;
 //             }
 //         });
-//         localStorage.setItem('rating', JSON.stringify(filmCatalog));
+//         localStorage.setItem('rating', JSON.stringify(movieList));
 //         localStorage.setItem('userList', JSON.stringify(userList));
 //         alert('Ha votado por ' + film + '. Gracias por participar. Se autoredigirirá en 3 segundos.');
 //         setTimeout(function () {
