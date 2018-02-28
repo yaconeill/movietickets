@@ -1,7 +1,7 @@
 $(document).ready(function () {
-    User = function (name, phone, email, tickets, costs, seats, selectedFilmId, filmTitle) {
+    User = function (id, name, email, tickets, costs, seats, selectedFilmId, filmTitle) {
+        this.id = id;
         this.name = name;
-        this.phone = phone;
         this.email = email;
         this.tickets = tickets;
         this.costs = costs;
@@ -15,13 +15,9 @@ $(document).ready(function () {
         'child': 6.2,
         'senior': 6.7
     };
-    // isLogin();
-    // var userName = localStorage.getItem('currentUser');
+    var userList = loadData();
     var $section = $('#section');
-    // isNewUser(userName, $section);
-    var userList = JSON.parse(localStorage.getItem('userList'));
-    if (userList == null)
-        userList = [];
+    // loadData();
     var selectedFilm = JSON.parse(localStorage.getItem('selectedFilm'));
     var movieList = JSON.parse(localStorage.getItem('movieList'));
     var seatSelection = $('.zoom_panel');
@@ -40,8 +36,15 @@ $(document).ready(function () {
         }
     });
 
-    var newUser = new User('tempUser', '', '', 0, 0, '', selectedFilm, title);
-    
+    $('#sala use').each(function (idx, e) {
+        if ($(this).hasClass('selected'))
+            numSelected++;
+    });
+
+    // localStorage.removeItem('userListTmp');
+    var newUser = new User(uuidv4(), 'tempUser', '', 0, 0, '', selectedFilm, title);
+    userList.push(newUser);
+    localStorage.setItem('currentUser', newUser.id);
     $('.jumbotron').css('opacity', '0.9');
     $moviePoster.children().remove();
     $moviePoster.append($('<div class="film">'));
@@ -70,9 +73,9 @@ $(document).ready(function () {
     $buttons.on('click', function () {
         let total = 0;
         let subTotal;
-        let span = $(this).closest('div').find('span');
+        let span = $(this).closest('div').find('.amount');
         let value = parseInt(span.text());
-        let type = $(this).closest('div').attr('class').split(' ')[1];
+        let type = $(this).closest('div').attr('class').split(' ').slice(-1);
         let price = Prices[type];
         if ($(this).data('action') === 'plus') {
             value++;
@@ -89,6 +92,14 @@ $(document).ready(function () {
                 $(this).closest('.row').find('p').last().text(subTotal);
             }
         }
+        let t = 0;
+        $('.amount').each(function () {
+            return t += parseInt($(this).text());
+        });
+        if (t > 0)
+            $nextBtn.fadeIn().show();
+        else
+            $nextBtn.fadeOut().hide('slow');
         $('.subtotal p').each(function () {
             total += parseFloat($(this).text());
         });
@@ -97,38 +108,77 @@ $(document).ready(function () {
     });
 
     function roundPrice(value) {
-
         return Math.round((value + 0.00001) * 100) / 100;
     }
 
-    $('#next').on('click', function(){
+    var $nextBtn = $('#next');
+    $nextBtn.hide();
+    $nextBtn.on('click', function () {
         let tickets = 0;
         $('.amount').each(function () {
             tickets += parseInt($(this).text());
         });
-        if (tickets > 10){
-            $('.error').append(`
-            <div class="alert alert-danger" role="alert">
-                Por favor seleccione como máximo 10 lugares.
-            </div>
-            `);
-        }else{
-            newUser.tickets = tickets;
-            userList.push(newUser);
-            localStorage.setItem('userList', JSON.stringify(userList));
+        if (tickets > 10) {
+            erroMsg('Por favor seleccione como máximo 10 lugares.');
+        } else if (tickets === 0) {
+            erroMsg('Por favor seleccione al menos 1.');
+        } else {
+            userList.find(e => {
+                if (e.id === localStorage.getItem('currentUser')) {
+                    e.tickets = tickets;
+                }
+            });
             $('.alert').alert('close');
             $('a[href="#chooseSeat"]').removeClass('disabled').tab('show').addClass('disabled');
         }
     });
+    function erroMsg(text) {
+        let $error = $('.error');
+        $error.children().remove();
+        $error.append(`<div class="alert alert-danger" role="alert">
+                            ${text}
+                        </div>`);
+    }
 
     //#endregion
 
+
     //#region - sala svg
     let $sala = $('#sala');
-    $sala.find('use').on('click', () => {
-        if ($(this).hasClass('noSelected'))
-            $(this).removeClass('noSelected').addClass('selected');
+
+    var Window = $(window);
+    if (Window[0].innerWidth < 768)
+        $sala.attr('height', '250');
+    else if (Window[0].innerWidth < 992)
+        $sala.attr('height', '300');
+    else if (Window[0].innerWidth < 1200)
+        $sala.attr('height', '400');
+    else
+        $sala.attr('height', '500');
+
+    Window.resize(function () {
+        if (Window[0].innerWidth < 768)
+            $sala.attr('height', '250');
+        else if (Window[0].innerWidth < 992)
+            $sala.attr('height', '300');
+        else if (Window[0].innerWidth < 1200)
+            $sala.attr('height', '400');
         else
+            $sala.attr('height', '500');
+    });
+
+    $sala.find('use').on('click', function () {
+        // userList = loadData();
+        let numTickets = userList.find(e => e.id === localStorage.getItem('currentUser')).tickets;
+        let numSelected = 0;
+        $('#sala use').each(function (idx, e) {
+            if ($(this).hasClass('selected'))
+                numSelected++;
+        });
+        if ($(this).hasClass('noSelected')) {
+            if (numSelected < numTickets)
+                $(this).removeClass('noSelected').addClass('selected');
+        } else
             $(this).removeClass('selected').addClass('noSelected');
     });
 
@@ -141,6 +191,75 @@ $(document).ready(function () {
     $('#resetSala').click(() => {
         $sala.attr('viewBox', '550 -80 2000 2600');
         $zoom.val('2600');
+    });
+
+    $('#goPay').click(function () {
+        let seatSelection = [];
+        // userList = loadData();
+        $('#sala use').each(function (idx, e) {
+            if ($(this).hasClass('selected')) {
+                let seat = $(this).data('butaca');
+                let row = parseInt($(this).parent().attr('id').split('w').slice(-1)[0]);
+                seatSelection.push({ 'seat': seat, 'row': row });
+            }
+        });
+        userList.find(e => {
+            if (e.id === localStorage.getItem('currentUser')) {
+                e.seats = seatSelection;
+            }
+        });
+        // localStorage.setItem('userListTmp', JSON.stringify(userList));
+        $('a[href="#payment"]').removeClass('disabled').tab('show').addClass('disabled');
+    });
+
+    $('form').submit(function (e) {
+        e.preventDefault();
+        // userList = loadData();
+        let text;
+        let form = $('#datos_pago').find('input');
+        let $showInfo = $('.data');
+        let movieList = JSON.parse(localStorage.getItem('movieList'));
+        userList.find(u => {
+            if (u.id === localStorage.getItem('currentUser')) {
+                u.email = form[0].value;
+                u.name = form[1].value;
+                movieList.find(m => {
+                    if (m.id === u.selectedFilmId.id) {
+                        m.sold[u.selectedFilmId.dayWeek] = [{ 'day': u.selectedFilmId.day, 'hour': u.selectedFilmId.hour, 'seats': u.seats }];
+                        // m.sold[u.selectedFilmId.dayWeek].idSeat = ;
+                        text = `ID: ${uuidv4()} - ${u.selectedFilmId.dayWeek} ${u.selectedFilmId.day}, ${u.selectedFilmId.hour} `;
+                        for (let i = 0; i < u.seats.length; i++) {
+                            text += ' || Fila: ' + u.seats[i].row;
+                            text += ' Asiento: ' + u.seats[i].seat;
+                        $showInfo.eq(3).find('.butacas').append(`<p>Fila: ${u.seats[i].row} Asiento: ${u.seats[i].seat}</p>`);                            
+                        }
+                        $showInfo.eq(2).find('p').text(m.title);
+                    }
+                });
+                localStorage.setItem('movieList', JSON.stringify(movieList));
+                $showInfo.eq(0).find('p').text(`${u.selectedFilmId.dayWeek} ${u.selectedFilmId.day}`);
+                $showInfo.eq(1).find('p').text(u.selectedFilmId.hour);
+                $('.payed').text(u.costs + ' €');
+            }
+        });
+        localStorage.setItem('userList', JSON.stringify(userList));
+        // localStorage.removeItem('userListTmp');
+        new QRCode(document.getElementById("qrcode"), {
+            text: text,
+            width: 128,
+            height: 128,
+            colorDark: "#000000",
+            colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.H
+        });
+        $('a[href="#confirm"]').removeClass('disabled').tab('show').addClass('disabled');
+    });
+
+    $('#goBackTickets').click(function () {
+        $('a[href="#tickets"]').removeClass('disabled').tab('show').addClass('disabled');
+    });
+    $('#goBackSeats').click(function () {
+        $('a[href="#chooseSeat"]').removeClass('disabled').tab('show').addClass('disabled');
     });
 
     let $zoom = $('#zoom');
@@ -205,106 +324,16 @@ $(document).ready(function () {
         $sala.attr('viewBox', `${prevVB[0]} ${prevVB[1]} ${prevVB[2]} ${prevVB[3]}`);
     }
     //#endregion
+    function loadData() {
+        userList = JSON.parse(localStorage.getItem('userList'));
+        if (userList == null)
+            userList = [];
+        return userList;
+    }
+    function uuidv4() {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+            var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+            return v.toString(16);
+        });
+    }
 });
-
-// User = function (name, phone, email, selectedFilmId) {
-//     this.name = name;
-//     this.phone = phone;
-//     this.email = email;
-//     this.selectedFilmId = selectedFilmId;
-// }
-// isLogin();
-// var userName = localStorage.getItem('currentUser');
-// var $section = $('#section');
-// isNewUser(userName, $section);
-// var userList = JSON.parse(localStorage.getItem('userList'));
-// if (userList == null)
-//     userList = [];
-
-// var selectedFilm = localStorage.getItem('selectedFilm');
-// var movieList = JSON.parse(localStorage.getItem('rating'));
-
-
-// var $film = $(this).prev().attr('id');
-// var $film = $(this).attr('id');
-
-// var $movieDetails = $('#movieDetails');
-// var tmpFilm;
-// var url;
-// movieList.find(o => {
-//     if (o.id === selectedFilm) {
-//         tmpFilm = o;
-//         // url = o.img;
-//     }
-// });
-// bgImg.forEach(e => {
-//     if (e.id == selectedFilm)
-//         url = e.img;
-// });
-// $('body').css('background-image', `url(${url}`);
-// $('body').css('background-repeat', 'no-repeat');
-// // $('body').css('background-size', '100%');
-// $('body').css('background-attachment', 'fixed');
-// $('.jumbotron').css('opacity', '0.9')
-// $movieDetails.children().remove();
-// $movieDetails.append($('<div class="film">'));
-// $('.title').text(tmpFilm.name);
-// $movieDetails.children('div').append(
-//     $(`<img src="../${tmpFilm.img}" title="${tmpFilm.name}" alt="${tmpFilm.name}" id="${tmpFilm.id}"/>`));
-// $('.sinopsis').text(tmpFilm.description);
-
-// var $form = $('#register');
-// $form.submit(function () {
-//     $userData = $form.find('input');
-//     userName = $userData[0].value;
-//     let user = new User($userData[0].value, $userData[1].value, $userData[2].value, '');
-//     userList.push(user);
-//     localStorage.setItem('userList', JSON.stringify(userList));
-//     localStorage.setItem('currentUser', $userData[0].value);
-//     isLogin();
-//     $section.children().remove();
-//     isNewUser(userName, $section);
-//     location.reload();
-// });
-
-// $('#logout').click(function () {
-//     localStorage.removeItem('currentUser');
-//     location.reload();
-// });
-
-// $('#vote').click(function () {
-//     if (userList.find(o => o.selectedFilm == null) != null) {
-//         let filmClickId = $('img').attr('id');
-//         let film;
-//         movieList.find(o => {
-//             if (o.id === filmClickId) {
-//                 o.rate += 1;
-//                 film = o.name;
-//             }
-//         });
-//         userList.find(o => {
-//             if (o.name === userName) {
-//                 o.selectedFilm = filmClickId;
-//             }
-//         });
-//         localStorage.setItem('rating', JSON.stringify(movieList));
-//         localStorage.setItem('userList', JSON.stringify(userList));
-//         alert('Ha votado por ' + film + '. Gracias por participar. Se autoredigirirá en 3 segundos.');
-//         setTimeout(function () {
-//             window.location.href = "../pages/results.html";
-//         }, 3000);
-
-//     } else {
-//         alert('Solo se puede votar una vez');
-//     }
-// });
-// });
-
-// function isNewUser(userName, $section) {
-//     if (userName != null) {
-//         $section.children().remove();
-//         $section.append($('<div class="col-md-1 mx-auto">'));
-//         $section.children('div').append($(`<input type="button"
-//         value="Votar" id="vote" aria-label="Al hacer click realizará su voto y se redigirirá automáticamente a los resultados. Solo se puede votar una vez" class="btn btn-success rate" autofocus/>`));
-//     }
-// }

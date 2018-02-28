@@ -112,6 +112,17 @@ body {
 #donutIcon {
   height: 20px; }
 
+::-webkit-scrollbar {
+  width: 12px; }
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 10px; }
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5); }
+
 #details .card-body {
   text-align: justify; }
 
@@ -121,14 +132,20 @@ body {
     font-size: .8em;
     text-align: justify; }
 
+#details .schedule {
+  overflow: auto; }
+
 #details img {
-  width: 15rem; }
+  width: 100%; }
 
 #details .bg-info {
   color: #fff; }
 
 #details td:not(.bg-dark):hover {
   cursor: pointer; }
+
+#details h5 button {
+  color: black !important; }
 
 .footer {
   font-size: 1.8vmin;

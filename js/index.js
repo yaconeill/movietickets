@@ -5,8 +5,7 @@
  * @param  {Int} id - id from the item
  * @param  {Int} rate - amount of votes
  */
-$(document)
-    .ready(function () {
+$(document).ready(function () {
         RatingData = function (type, name, id, rate) {
             this.type = type
             this.name = name;
@@ -33,6 +32,7 @@ $(document)
         /**
          * Variables declaration
          */
+        let $error = $('.error');
         var movieList = [];
         var filters = [];
         var requestedFilter = [];
@@ -64,13 +64,11 @@ $(document)
         /**
          * Checks if the user is logged.
          */
-        isLogin();
         printCards(movieList);
 
         /**
          * Function to print the cards, that contains the information from the item, on the container
          * @param  {OBJECT} list - Json with the items
-         * @param  {String} mode - type of selection
          */
         function printCards(list) {
 
@@ -90,7 +88,7 @@ $(document)
                         title = list[i].title.substr(0, 20) + '...';
                     $divMovies.children().find('.card-block').eq(i).append(
                         $(`<h4 class="card-header">${title}</h4>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" 
+                        <button type="button" class="btn btn-elegant" data-toggle="modal" 
                         data-target="#details" data-card="com-${list[i].id}">Más info</button>`));
                 }
             } else {
@@ -100,16 +98,15 @@ $(document)
             /**
              * It make the item description shorter, showing tags to show more and less
              */
-            $('.moreModal')
-                .each(function () {
-                    var content = $(this).html();
-                    if (content.length > showCharModal) {
-                        var c = content.substr(0, showCharModal);
-                        var h = content.substr(showCharModal, content.length - showCharModal);
-                        var html = c + '<span class="moreellipses">' + ellipsesText + '&nbsp;</span><span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink">' + moreText + '</a></span>';
-                        $(this).html(html);
-                    }
-                });
+            $('.moreModal').each(function () {
+                var content = $(this).html();
+                if (content.length > showCharModal) {
+                    var c = content.substr(0, showCharModal);
+                    var h = content.substr(showCharModal, content.length - showCharModal);
+                    var html = c + '<span class="moreellipses">' + ellipsesText + '&nbsp;</span><span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink">' + moreText + '</a></span>';
+                    $(this).html(html);
+                }
+            });
             $('.more').each(function () {
                 var content = $(this).html();
                 if (content.length > showChar) {
@@ -130,17 +127,9 @@ $(document)
                     $(this).html(lessText);
                 }
                 $(this).parent().prev().toggle();
-                $(this).prev().toggle();return false;
+                $(this).prev().toggle(); return false;
             });
         }
-
-        //     /**
-        //  * In the cases that the items have no description, this function adds an
-        // informative text
-        //  * @param {Array} list - Items object array  */     function
-        // noDescription(list) {         list.forEach(e => {             if
-        // (e.description === "" || e.description === null) e.description = 'No
-        // description available.';             }         )     }
 
         /**
          * On windows scroll shows a button to scroll back to the top
@@ -164,7 +153,7 @@ $(document)
          */
         $('#details').on('show.bs.modal', (event) => {
             let modal = $('#details');
-            let btnVote = $('#vote');
+            // let btnVote = $('#vote');
             var button = $(event.relatedTarget); // Button that triggered the modal
             var dataId = button.data('card').split('-')[1]; // Extract info from data-card attributes
             modal.find('.weekDays').children().remove();
@@ -221,23 +210,24 @@ $(document)
                                     day = 1;
                                 break;
                         }
-                        modal.find('.weekDays').append(`<th>${dw} ${day}</th>`);
+                        modal.find('.weekDays').append(`<td scope="col">${dw} ${day}</td>`);
                         day++;
 
                         for (let i = 0; i < 7; i++)
                             modal.find('.days').append(`<tr class="table-light"></tr>`);
-                        for (let i = 0; i < e.schedule[dw].length; i++, j++)
+                        for (let i = 0; i < e.schedule[dw].length; i++ , j++)
                             modal.find('.table-light').eq(j).append(`<td>${e.schedule[dw][i]}</td>`);
                         j = 0;
                     });
                 }
             });
             $('#schedule td').click((e) => {
+                $error.children().remove();
                 modal.find('td').map((idx, e) => e.removeAttribute('class', 'bg-info'));
                 e.currentTarget.setAttribute('class', 'bg-info');
                 let id = modal.find('img').attr('id');
                 let hour = e.currentTarget.textContent;
-                let dayW = modal.find('th').eq(e.currentTarget.cellIndex).text().split(' ');
+                let dayW = modal.find('td').eq(e.currentTarget.cellIndex).text().split(' ');
                 let month;
 
                 localStorage.setItem('selectedFilm', JSON.stringify({
@@ -277,61 +267,76 @@ $(document)
          */
         var $form = $('#register');
 
-        $form.submit(function () {
-            $userData = $form.find('input');
-            if (userName !== '') {
-                let user = new User($userData[0].value, $userData[2].value, $userData[1].value, '', '');
-                userName = $userData[0].value;
-                userList.push(user);
-                localStorage.setItem('userList', JSON.stringify(userList));
-                localStorage.setItem('currentUser', userName);
-                isLogin();
-            } else
-                userName = localStorage.getItem('currentUser');
-            vote();
+        $form.submit(function (evt) {
+            let modal = $('#details');
+            let td = modal.find('td');
+            let any = 0;
+            td.each(function (idx, e) {
+                if ($(e).hasClass('bg-info'))
+                    any++;
+            });
+            if (any === 0) {
+                evt.preventDefault();
+                $error.children().remove();
+                $error.append(`<div class="alert alert-danger" role="alert">
+                            Debe seleccionar una hora
+                        </div>`);
+                $('#collapseTwo').collapse('show');
+            }
+            // $userData = $form.find('input');
+            // if (userName !== '') {
+            //     let user = new User($userData[0].value, $userData[2].value, $userData[1].value, '', '');
+            //     userName = $userData[0].value;
+            //     userList.push(user);
+            //     localStorage.setItem('userList', JSON.stringify(userList));
+            //     localStorage.setItem('currentUser', userName);
+            //     isLogin();
+            // } else
+            //     userName = localStorage.getItem('currentUser');
+            // vote();
         });
 
-        function vote() {
-            type = $('.nav')
-                .find('a.show')
-                .attr('href')
-                .substr(1);
-            let catalog;
-            if (type === 'characters')
-                catalog = charactersCatalog;
-            else
-                catalog = comicsCatalog;
-            let filmClickId = parseInt($('#register').find('img').attr('id').split(',')[1]);
-            let rate;
-            catalog.find(o => {
-                if (o.id === filmClickId) {
-                    if (!ratingData.find(e => {
-                            if (e.id === filmClickId) {
-                                e.rate++;
-                                return true;
-                            }
-                        })) {
-                        if (type === 'characters')
-                            rate = new RatingData(type, o.name, o.id, 1);
-                        else
-                            rate = new RatingData(type, o.title, o.id, 1);
-                        ratingData.push(rate);
-                    }
-                }
-            });
-            userList.find(o => {
-                if (o.name === userName) {
-                    if (type === 'characters')
-                        o.selectedCharacterId = filmClickId;
-                    else
-                        o.selectedComicId = filmClickId;
-                }
-            });
-            localStorage.setItem('ratingData', JSON.stringify(ratingData));
-            localStorage.setItem('userList', JSON.stringify(userList));
-            alert('Thanks for participate. You will be redirect in a few.');
-            setTimeout(function () {
-                window.location.href = "pages/movieDetails.html";
-            }, 2000);
-        }
+        // function vote() {
+        //     type = $('.nav')
+        //         .find('a.show')
+        //         .attr('href')
+        //         .substr(1);
+        //     let catalog;
+        //     if (type === 'characters')
+        //         catalog = charactersCatalog;
+        //     else
+        //         catalog = comicsCatalog;
+        //     let filmClickId = parseInt($('#register').find('img').attr('id').split(',')[1]);
+        //     let rate;
+        //     catalog.find(o => {
+        //         if (o.id === filmClickId) {
+        //             if (!ratingData.find(e => {
+        //                 if (e.id === filmClickId) {
+        //                     e.rate++;
+        //                     return true;
+        //                 }
+        //             })) {
+        //                 if (type === 'characters')
+        //                     rate = new RatingData(type, o.name, o.id, 1);
+        //                 else
+        //                     rate = new RatingData(type, o.title, o.id, 1);
+        //                 ratingData.push(rate);
+        //             }
+        //         }
+        //     });
+        //     userList.find(o => {
+        //         if (o.name === userName) {
+        //             if (type === 'characters')
+        //                 o.selectedCharacterId = filmClickId;
+        //             else
+        //                 o.selectedComicId = filmClickId;
+        //         }
+        //     });
+        //     localStorage.setItem('ratingData', JSON.stringify(ratingData));
+        //     localStorage.setItem('userList', JSON.stringify(userList));
+        //     alert('Thanks for participate. You will be redirect in a few.');
+        //     setTimeout(function () {
+        //         window.location.href = "pages/movieDetails.html";
+        //     }, 2000);
+        // }
     });

@@ -6,12 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Rating</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.5/css/mdb.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">
-    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/qtip2/3.0.3/jquery.qtip.min.css" />
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
     <script src="https://yoannmoinet.github.io/nipplejs/javascripts/nipplejs.js"></script>
+    <script src="../js/qrcode.min.js"></script>
 </head>
 
 <body>
@@ -45,11 +46,11 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="row">
-                        <div class="col-md-2">
+                        <div class="col">
                             <div id="moviePoster" tabindex=0 role="heading" aria-level="2"></div>
                         </div>
                         <div class="col-md-4 details"></div>
-                        <div class="col-md-3 mx-auto" aria-level="3" tabindex="0">
+                        <div class="col mx-auto" aria-level="3" tabindex="0">
                             <div class="card border-danger mb-3 text-center">
                                 <div class="card-header">TOTAL</div>
                                 <div class="card-body">
@@ -69,16 +70,16 @@
                         <div class="col-md-12">
                             <ul class="nav nav-tabs">
                                 <li class="nav-item">
-                                    <a class="nav-link disabled active show" data-toggle="tab" href="#tickets">Selecciona tus entradas</a>
+                                    <a class="nav-link disabled active show" data-toggle="tab" href="#tickets">① Selecciona tus entradas</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link disabled" data-toggle="tab" href="#chooseSeat">Escoge tu lugar</a>
+                                    <a class="nav-link disabled" data-toggle="tab" href="#chooseSeat">② Escoge tu lugar</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link disabled" data-toggle="tab" href="#payment">Haz tu pago</a>
+                                    <a class="nav-link disabled" data-toggle="tab" href="#payment">③ Haz tu pago</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link disabled" data-toggle="tab" href="#confirm">Confirma tu compra</a>
+                                    <a class="nav-link disabled" data-toggle="tab" href="#confirm">④ Datos de la compra</a>
                                 </li>
                             </ul>
                             <div id="myTabContent" class="tab-content">
@@ -87,88 +88,88 @@
                                     <p class="text-center">Se puede comprar como máximo 10 entradas por transacción.</p>
                                     <div class="error"></div>
                                     <div class="row text-center">
-                                        <div class="col-sm-9 offset-3">
-                                            <div class="row">
-                                                <div class="col-md-3 offset-2">CANTIDAD:</div>
-                                                <div class="col-md-2">PRECIO:</div>
-                                                <div class="col-md-2">SUBTOTAL:</div>
+                                        <div class="col-sm-10 col-xs-10 mx-auto">
+                                            <div class="row text-center ml-5">
+                                                <div class="col">CANTIDAD:</div>
+                                                <div class="col">PRECIO:</div>
+                                                <div class="col">SUBTOTAL:</div>
                                             </div>
                                         </div>
-                                        <div class="col-sm-9 offset-3 entradas">
+                                        <div class="col-sm-10 col-xs-10 mx-auto entradas">
                                             <div class="row">
-                                                <div class="col-md-2">
-                                                    <span>ADULTO</span>
-                                                </div>
-                                                <div class="col-md-3 adult">
+                                                <div class="col-5 adult">
+                                                    <div class="col mx-auto">
+                                                        <span>ADULTO</span>
+                                                    </div>
                                                     <button type="button" data-action="minus" class="btn btn-outline-secondary btn-circle btn-sm">-</button>
                                                     <span class="amount">0</span>
                                                     <button type="button" data-action="plus" class="btn btn-outline-danger  btn-circle btn-sm">+</button>
                                                 </div>
-                                                <div class="col-md-2">
+                                                <div class="col">
                                                     <p>8.20</p>
                                                 </div>
-                                                <div class="col-md-2 subtotal">
+                                                <div class="col subtotal">
                                                     <p>0</p>
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-2">
-                                                    <span>JOVEN</span>
-                                                </div>
-                                                <div class="col-md-3 young">
+                                                <div class="col-5 young">
+                                                    <div class="col">
+                                                        <span>JOVEN</span>
+                                                    </div>
                                                     <button type="button" data-action="minus" class="btn btn-outline-secondary btn-circle btn-sm">-</button>
                                                     <span class="amount">0</span>
                                                     <button type="button" data-action="plus" class="btn btn-outline-danger  btn-circle btn-sm">+</button>
                                                 </div>
-                                                <div class="col-md-2">
+                                                <div class="col">
                                                     <p>6.70</p>
                                                 </div>
-                                                <div class="col-md-2 subtotal">
+                                                <div class="col subtotal">
                                                     <p>0</p>
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-2">
-                                                    <span>NIÑO</span>
-                                                </div>
-                                                <div class="col-md-3 child">
+                                                <div class="col-5 child">
+                                                    <div class="col">
+                                                        <span>NIÑO</span>
+                                                    </div>
                                                     <button type="button" data-action="minus" class="btn btn-outline-secondary btn-circle btn-sm">-</button>
                                                     <span class="amount">0</span>
                                                     <button type="button" data-action="plus" class="btn btn-outline-danger  btn-circle btn-sm">+</button>
                                                 </div>
-                                                <div class="col-md-2">
+                                                <div class="col">
                                                     <p>6.20</p>
                                                 </div>
-                                                <div class="col-md-2 subtotal">
+                                                <div class="col subtotal">
                                                     <p>0</p>
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-2">
-                                                    <span>SENIOR</span>
-                                                </div>
-                                                <div class="col-md-3 senior">
+                                                <div class="col-5 senior">
+                                                    <div class="col">
+                                                        <span>SENIOR</span>
+                                                    </div>
                                                     <button type="button" data-action="minus" class="btn btn-outline-secondary btn-circle btn-sm">-</button>
                                                     <span class="amount">0</span>
                                                     <button type="button" data-action="plus" class="btn btn-outline-danger  btn-circle btn-sm">+</button>
                                                 </div>
-                                                <div class="col-md-2">
+                                                <div class="col">
                                                     <p>6.70</p>
                                                 </div>
-                                                <div class="col-md-2 subtotal">
+                                                <div class="col subtotal">
                                                     <p>0</p>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-4 offset-5">
+                                        <div class="col-xs-2 mx-auto">
                                             <button type="button" class="btn btn-success" id="next">Elige un lugar</button>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="chooseSeat">
-                                    <div class="col-md-8 mx-auto" aria-label="Elegir asiento en la sala">
+                                    <div class="col-12 col-md-10 mx-auto" aria-label="Elegir asiento en la sala">
                                         <did class="row">
                                             <div class="col-md-10 mx-auto">
                                                 <h5 class="text-center">Selecciona tus butacas</h5>
@@ -188,7 +189,7 @@
                                             </div>
                                         </did>
                                         <hr class="my-4">
-                                        <svg width="620" height="420" id="sala" viewBox="600 -80 2000 2600" style="background: #e52d27; background: -webkit-linear-gradient(to right, #e52d27, #b31217); background: linear-gradient(to right, #e52d27, #b31217);">
+                                        <svg width="100%" height="420" id="sala" viewBox="600 -80 2000 2600" style="background: #e52d27; background: -webkit-linear-gradient(to right, #e52d27, #b31217); background: linear-gradient(to right, #e52d27, #b31217);">
                                             <use x="60" y="-1250" width="3000" xlink:href="#pantalla" />
                                             <g id="rowNumber">
                                                 <text x="-100" y="250" class="fil2 fnt0">1</text>
@@ -538,108 +539,214 @@
                                         <button type="button" id="resetSala" class="btn btn-info">Reiniciar zoom</button>
                                         <input type="range" class="slider" name="zoom" id="zoom" min="1000" step="100" max="2600" value="2600">
                                         <div id="zone_joystick"></div>
+                                        <div class="text-center mt-3">
+                                            <button type="button" id="goBackTickets" class="btn btn-dark">Volver</button>
+                                            <button type="button" id="goPay" class="btn btn-success">Haz tu pago</button>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="payment">
-
+                                    <div class="col-12" aria-label="Realizar pago">
+                                        <did class="row">
+                                            <div class="col">
+                                                <h5 class="text-center">Selecciona tu forma de pago</h5>
+                                                <p class="text-center">Por favor, revisa la película, fecha, sesión y que la información que arriba
+                                                    se muestra es la que has seleccionado para tus entradas de cine ya que
+                                                    no se podrá hacer cambios ni devoluciones una vez finalizada la compra.
+                                                    Por favor, introduce la información correspondiente para llevar a cabo
+                                                    el pago de las entradas. Verifique dos veces que esta información es
+                                                    la correcta y haga clic en el botón de CONFIRMA TU COMPRA que está abajo
+                                                    para procesar su transacción. El límite para recoger las entradas es
+                                                    el final de la sesión escogida.</p>
+                                                <form id="datos_pago" class="form">
+                                                    <div class="row">
+                                                        <div class="col-8 mx-auto">
+                                                            <div class="md-form">
+                                                                <label for="orangeForm-email">Correo electrónico</label>
+                                                                <input type="text" id="orangeForm-email" autocomplete='email' id="email" aria-label="Escribir correo electrónico" aria-required="true"
+                                                                    required>
+                                                            </div>
+                                                            <div class="md-form">
+                                                                <label for="name">Nombre</label>
+                                                                <input type="text" name="name" id="name" required>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-10">
+                                                                    <div class="md-form">
+                                                                        <label for="card">Nº de tarjeta</label>
+                                                                        <input type="text" pattern="[0-9]{16}" name="card" id="card" required>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-2">
+                                                                    <div class="md-form">
+                                                                        <label for="card">CVV</label>
+                                                                        <input type="number" min="1" max="999" name="cvv" id="cvv" required>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="edate">
+                                                                <div class="form-group">
+                                                                    <label for="year">Expira</label>
+                                                                    <select class="form-control" id="year" required>
+                                                                        <option value="1">Enero</option>
+                                                                        <option value="2">Febrero</option>
+                                                                        <option value="3">Marzo</option>
+                                                                        <option value="4">Abril</option>
+                                                                        <option value="5">Mayo</option>
+                                                                        <option value="6">Junio</option>
+                                                                        <option value="7">Julio</option>
+                                                                        <option value="8">Augosto</option>
+                                                                        <option value="9">Septiembre</option>
+                                                                        <option value="10">Octubre</option>
+                                                                        <option value="11">Noviembre</option>
+                                                                        <option value="12">Diciembre</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <select class="form-control" required>
+                                                                        <option value="2018">2018</option>
+                                                                        <option value="2019">2019</option>
+                                                                        <option value="2020">2020</option>
+                                                                        <option value="2021">2021</option>
+                                                                        <option value="2022">2022</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="submit-wrapper">
+                                                                <button class="btn btn-primary" type="submit" id="pay">Pagar</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                                <p>Cuando de clic en CONFIRMA TU COMPRA su transacción será procesada y no se
+                                                    puede dar marcha atrás.</p>
+                                            </div>
+                                        </did>
+                                    </div>
                                 </div>
                                 <div class="tab-pane fade" id="confirm">
-
+                                    <div class="row">
+                                        <div class="col-8 mx-auto text-center">
+                                            <h5>Datos de la compra</h5>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="data">
+                                                        <span>
+                                                            <strong>Fecha:</strong>
+                                                        </span>
+                                                        <p></p>
+                                                    </div>
+                                                    <div class="data">
+                                                        <span>
+                                                            <strong>Hora:</strong>
+                                                        </span>
+                                                        <p></p>
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="data">
+                                                        <span>
+                                                            <strong>Película:</strong>
+                                                        </span>
+                                                        <p></p>
+                                                    </div>
+                                                    <div class="data">
+                                                        <span>
+                                                            <strong>Entradas:</strong>
+                                                        </span>
+                                                        <div class="butacas">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-5 mx-auto text-center">
+                                                        <span>TOTAL DE LA COMPRA</span>
+                                                        <strong class="payed"></strong>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-8 mx-auto text-center">
+                                            <p class="text-center">Con éste código podrás entrar en la sala.</p>
+                                            <div class="row">
+                                                <div class="col-3 mx-auto">
+                                                    <div id="qrcode"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- <div class="jumbotron zoom_panel" style="display: none;">
-                <div id="section">
-                    <div class="row">
-                        <div class="col-md-7 mx-auto" aria-label="Elegir asiento en la sala">
-                            
-                            <form id="register">
-                            <div class="form-group">
-                                <label for="name">Nombre</label>
-                                <input type="text" class="form-control" id="name" aria-label="Escribir nombre" aria-required="true">
-                            </div>
-                            <div class="form-group">
-                                <label for="phone">Teléfono</label>
-                                <input type="text" class="form-control" maxlength="9" pattern="[0-9]{9}" id="phone" aria-label="Escribir número de teléfono" aria-required="true">
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Correo electrónico</label>
-                                <input type="email" class="form-control" id="email" aria-label="Escribir correo electrónico" aria-required="true">
-                            </div>
-                            <button type="submit" class="btn btn-primary" aria-label="Botón para registrar los datos y entrar en el sorteo">Enviar datos</button>
-                        </form>
-                        </div>
-                    </div>
-                </div>
-            </div>-->
-        </div>
-        <div style="display: none;">
-            <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="2000px" height="2000px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
-                viewBox="0 0 2000 2000" xmlns:xlink="http://www.w3.org/1999/xlink">
-                <defs>
-                    <style type="text/css">
-                        .str0 {
-                            stroke: black;
-                            stroke-width: 45;
-                            stroke-miterlimit: 22.9256
-                        }
-                    </style>
-                </defs>
-                <symbol id="butaca" viewBox="0 0 2000 2000">
-                    <!-- <title>Butaca</title> -->
-                    <g>
-                        <path class="fil0 str0" fill="#fff" d="M115.59 60.728l194.445 0c42.778,0 77.778,35 77.778,77.778l0 1286.766 -350 0 0 -1286.766c0,-42.778 35,-77.778 77.777,-77.778z"
-                        />
-                        <path class="fil0 str0" fill="#fff" d="M1689.965 60.728l194.445 0c42.778,0 77.778,35 77.778,77.778l0 1286.766 -350 0 0 -1286.766c0,-42.778 34.999,-77.778 77.777,-77.778z"
-                        />
-                        <path class="fil0 str0" fill="#fff" d="M553.236 1537.522l893.528 0c90.983,0 165.424,-74.441 165.424,-165.424l0 -1058.15c0,-131.477 -107.571,-239.049 -239.048,-239.049l-746.279 0c-131.477,0 -239.048,107.572 -239.048,239.049l0 1058.15c0,90.983 74.44,165.424 165.423,165.424z"
-                        />
-                        <path class="fil0 str0" fill="#fff" d="M1612.188 1425.272c1.179,63.347 -74.461,103.934 -131.482,108.725 -60.498,5.083 -263.976,0.882 -454.893,3.525 -115.253,1.595 -229.38,0 -322.358,0 -110.469,0 -259.955,7 -315.642,-112.25 -160.365,0 -189.636,0 -350,0 0,283.8 430.924,514 962.187,514 531.263,0 962.188,-230.2 962.188,-514 -160.365,0 131.093,0 -350,0z"
-                        />
-                    </g>
-                </symbol>
-            </svg>
-            <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="2100px" height="150px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
-                viewBox="0 0 2100 150" xmlns:xlink="http://www.w3.org/1999/xlink">
-                <defs>
-                    <style type="text/css">
-                        .str0-s {
-                            stroke: black;
-                            stroke-width: 4;
-                            stroke-miterlimit: 22.9256;
-                        }
+            <div style="display: none;">
+                <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="2000px" height="2000px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+                    viewBox="0 0 2000 2000" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <defs>
+                        <style type="text/css">
+                            .str0 {
+                                stroke: black;
+                                stroke-width: 45;
+                                stroke-miterlimit: 22.9256
+                            }
+                        </style>
+                    </defs>
+                    <symbol id="butaca" viewBox="0 0 2000 2000">
+                        <!-- <title>Butaca</title> -->
+                        <g>
+                            <path class="fil0 str0" fill="#fff" d="M115.59 60.728l194.445 0c42.778,0 77.778,35 77.778,77.778l0 1286.766 -350 0 0 -1286.766c0,-42.778 35,-77.778 77.777,-77.778z"
+                            />
+                            <path class="fil0 str0" fill="#fff" d="M1689.965 60.728l194.445 0c42.778,0 77.778,35 77.778,77.778l0 1286.766 -350 0 0 -1286.766c0,-42.778 34.999,-77.778 77.777,-77.778z"
+                            />
+                            <path class="fil0 str0" fill="#fff" d="M553.236 1537.522l893.528 0c90.983,0 165.424,-74.441 165.424,-165.424l0 -1058.15c0,-131.477 -107.571,-239.049 -239.048,-239.049l-746.279 0c-131.477,0 -239.048,107.572 -239.048,239.049l0 1058.15c0,90.983 74.44,165.424 165.423,165.424z"
+                            />
+                            <path class="fil0 str0" fill="#fff" d="M1612.188 1425.272c1.179,63.347 -74.461,103.934 -131.482,108.725 -60.498,5.083 -263.976,0.882 -454.893,3.525 -115.253,1.595 -229.38,0 -322.358,0 -110.469,0 -259.955,7 -315.642,-112.25 -160.365,0 -189.636,0 -350,0 0,283.8 430.924,514 962.187,514 531.263,0 962.188,-230.2 962.188,-514 -160.365,0 131.093,0 -350,0z"
+                            />
+                        </g>
+                    </symbol>
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="2100px" height="150px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+                    viewBox="0 0 2100 150" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <defs>
+                        <style type="text/css">
+                            .str0-s {
+                                stroke: black;
+                                stroke-width: 4;
+                                stroke-miterlimit: 22.9256;
+                            }
 
-                        .fil0-s {
-                            fill: wheat;
-                            fill-rule: nonzero
-                        }
+                            .fil0-s {
+                                fill: wheat;
+                                fill-rule: nonzero
+                            }
 
-                        .fil1-s {
-                            fill: black;
-                            fill-rule: nonzero
-                        }
-                    </style>
-                </defs>
-                <symbol id="pantalla" viewBox="45 27.211 2010 92.866">
-                    <path class="fil0-s str0-s" d="M2050 117.789c0,-28.526 -2000,-28.526 -2000,0 0,-21.395 0,-42.789 0,-64.184 0,-28.526 2000,-28.526 2000,0 0,21.395 0,42.789 0,64.184z"
-                    />
-                    <path class="fil1-s" d="M788.648 72.867l0 -28.64 9.273 0c3.514,0 5.8,0.14 6.867,0.427 1.64,0.433 3.013,1.366 4.12,2.806 1.107,1.44 1.66,3.301 1.66,5.58 0,1.761 -0.32,3.234 -0.953,4.434 -0.64,1.2 -1.447,2.14 -2.427,2.826 -0.98,0.68 -1.98,1.134 -2.993,1.354 -1.38,0.273 -3.374,0.413 -5.987,0.413l-3.76 0 0 10.8 -5.8 0zm5.8 -23.8l0 8.16 3.154 0c2.273,0 3.786,-0.153 4.553,-0.453 0.767,-0.3 1.366,-0.767 1.8,-1.414 0.433,-0.64 0.653,-1.38 0.653,-2.233 0,-1.047 -0.306,-1.906 -0.913,-2.586 -0.614,-0.681 -1.38,-1.107 -2.32,-1.281 -0.687,-0.126 -2.067,-0.193 -4.147,-0.193l-2.78 0zm89.278 23.8l-6.247 0 -2.473 -6.52 -11.487 0 -2.38 6.52 -6.133 0 11.12 -28.64 6.127 0 11.473 28.64zm-10.6 -11.36l-3.98 -10.6 -3.867 10.6 7.847 0zm59.251 11.36l0 -28.64 5.613 0 11.787 19.193 0 -19.193 5.36 0 0 28.64 -5.793 0 -11.607 -18.827 0 18.827 -5.36 0zm80.891 0l0 -23.8 -8.48 0 0 -4.84 22.72 0 0 4.84 -8.44 0 0 23.8 -5.8 0zm86.391 0l-6.247 0 -2.473 -6.52 -11.487 0 -2.38 6.52 -6.133 0 11.12 -28.64 6.127 0 11.473 28.64zm-10.6 -11.36l-3.98 -10.6 -3.867 10.6 7.847 0zm59.411 11.36l0 -28.4 5.8 0 0 23.56 14.36 0 0 4.84 -20.16 0zm69.998 0l0 -28.4 5.8 0 0 23.56 14.36 0 0 4.84 -20.16 0zm95.637 0l-6.246 0 -2.474 -6.52 -11.486 0 -2.38 6.52 -6.134 0 11.12 -28.64 6.127 0 11.473 28.64zm-10.6 -11.36l-3.98 -10.6 -3.867 10.6 7.847 0z"
-                    />
-                </symbol>
-            </svg>
-        </div>
-        <script src="../js/jquery-3.3.1.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-            crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-            crossorigin="anonymous"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/qtip2/3.0.3/jquery.qtip.min.js"></script>
-        <script src="../js/data.js"></script>
-        <script src="../js/common.js"></script>
-        <script src="../js/details.js"></script>
+                            .fil1-s {
+                                fill: black;
+                                fill-rule: nonzero
+                            }
+                        </style>
+                    </defs>
+                    <symbol id="pantalla" viewBox="45 27.211 2010 92.866">
+                        <path class="fil0-s str0-s" d="M2050 117.789c0,-28.526 -2000,-28.526 -2000,0 0,-21.395 0,-42.789 0,-64.184 0,-28.526 2000,-28.526 2000,0 0,21.395 0,42.789 0,64.184z"
+                        />
+                        <path class="fil1-s" d="M788.648 72.867l0 -28.64 9.273 0c3.514,0 5.8,0.14 6.867,0.427 1.64,0.433 3.013,1.366 4.12,2.806 1.107,1.44 1.66,3.301 1.66,5.58 0,1.761 -0.32,3.234 -0.953,4.434 -0.64,1.2 -1.447,2.14 -2.427,2.826 -0.98,0.68 -1.98,1.134 -2.993,1.354 -1.38,0.273 -3.374,0.413 -5.987,0.413l-3.76 0 0 10.8 -5.8 0zm5.8 -23.8l0 8.16 3.154 0c2.273,0 3.786,-0.153 4.553,-0.453 0.767,-0.3 1.366,-0.767 1.8,-1.414 0.433,-0.64 0.653,-1.38 0.653,-2.233 0,-1.047 -0.306,-1.906 -0.913,-2.586 -0.614,-0.681 -1.38,-1.107 -2.32,-1.281 -0.687,-0.126 -2.067,-0.193 -4.147,-0.193l-2.78 0zm89.278 23.8l-6.247 0 -2.473 -6.52 -11.487 0 -2.38 6.52 -6.133 0 11.12 -28.64 6.127 0 11.473 28.64zm-10.6 -11.36l-3.98 -10.6 -3.867 10.6 7.847 0zm59.251 11.36l0 -28.64 5.613 0 11.787 19.193 0 -19.193 5.36 0 0 28.64 -5.793 0 -11.607 -18.827 0 18.827 -5.36 0zm80.891 0l0 -23.8 -8.48 0 0 -4.84 22.72 0 0 4.84 -8.44 0 0 23.8 -5.8 0zm86.391 0l-6.247 0 -2.473 -6.52 -11.487 0 -2.38 6.52 -6.133 0 11.12 -28.64 6.127 0 11.473 28.64zm-10.6 -11.36l-3.98 -10.6 -3.867 10.6 7.847 0zm59.411 11.36l0 -28.4 5.8 0 0 23.56 14.36 0 0 4.84 -20.16 0zm69.998 0l0 -28.4 5.8 0 0 23.56 14.36 0 0 4.84 -20.16 0zm95.637 0l-6.246 0 -2.474 -6.52 -11.486 0 -2.38 6.52 -6.134 0 11.12 -28.64 6.127 0 11.473 28.64zm-10.6 -11.36l-3.98 -10.6 -3.867 10.6 7.847 0z"
+                        />
+                    </symbol>
+                </svg>
+            </div>
+            <script src="../js/jquery-3.3.1.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+                crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+                crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.5/js/mdb.min.js"></script>
+            <script src="../js/data.js"></script>
+            <script src="../js/common.js"></script>
+            <script src="../js/details.js"></script>
 </body>
 
 </html>

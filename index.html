@@ -5,20 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Rating</title>
+    <title>Cinema AMQ Tickets</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="css/simplePagination.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.5/css/mdb.min.css">
     <link rel="stylesheet" href="css/index.css">
     <script src="js/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript" src="js/jquery.simplePagination.js"></script>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="logo my-2">
             <img src="resources/svg/Logo_tickets.svg" alt="">
         </div>
@@ -99,7 +98,8 @@
                                     </div>
                                     <div id="collapseTwo" class="collapse" aria-labelledby="Mostrar horario" data-parent="#accordion">
                                         <div class="card-body schedule">
-                                            <table id="schedule" class="table text-center table-hover table-sm">
+                                            <div class="error"></div>
+                                            <table id="schedule" title="Selecciona una función" class="table text-center table-hover table-sm">
                                                 <thead class="table-dark">
                                                     <tr class="weekDays">
                                                     </tr>
@@ -111,51 +111,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- <p>
-                                <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Mostrar sinopsis</a>
-                                <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Mostrar horario</a>
-                            </p>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="collapse multi-collapse" id="multiCollapseExample1">
-                                        <div class="card card-body">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="collapse multi-collapse" id="multiCollapseExample1">
-                                        <div class="card card-body">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> -->
-                            <hr class="my-4">
-                            <!-- <div class="vote-form">
-                                <div class="col-md-10" aria-label="En el siguiente formulario todos los datos son obligatorios">
-                                    <p class="h5 text-center mb-4">To vote fill out the form for a chance to Win Two Movie Tickets!</p>
-                                    <div class="md-form">
-                                        <i class="fa fa-user prefix grey-text"></i>
-                                        <input type="text" id="orangeForm-name" class="form-control" autocomplete='name' id="name" aria-label="Escribir nombre" aria-required="true"
-                                            required>
-                                        <label for="orangeForm-name">Your name</label>
-                                    </div>
-                                    <div class="md-form">
-                                        <i class="fa fa-envelope prefix grey-text"></i>
-                                        <input type="text" id="orangeForm-email" class="form-control" autocomplete='email' id="email" aria-label="Escribir correo electrónico"
-                                            aria-required="true" required>
-                                        <label for="orangeForm-email">Your email</label>
-                                    </div>
-                                    <div class="md-form">
-                                        <i class="fa fa-lock prefix grey-text"></i>
-                                        <input type="tel" id="orangeForm-pass" class="form-control" autocomplete='tel-national' maxlength="9" pattern="[0-9]{9}"
-                                            id="phone" aria-label="Escribir número de teléfono" required>
-                                        <label for="orangeForm-pass">Your telephone</label>
-                                    </div>
-                                </div>
-                            </div> -->
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
                             <button type="submit" id="vote" class="btn btn-success">Comprar</button>
                         </div>
                     </div>
@@ -174,6 +132,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.5/js/mdb.min.js"></script>
     <script src="js/data.js"></script>
     <script src="js/common.js"></script>
     <script src="js/index.js"></script>
