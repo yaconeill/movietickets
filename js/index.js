@@ -295,48 +295,10 @@ $(document).ready(function () {
             //     userName = localStorage.getItem('currentUser');
             // vote();
         });
-
-        // function vote() {
-        //     type = $('.nav')
-        //         .find('a.show')
-        //         .attr('href')
-        //         .substr(1);
-        //     let catalog;
-        //     if (type === 'characters')
-        //         catalog = charactersCatalog;
-        //     else
-        //         catalog = comicsCatalog;
-        //     let filmClickId = parseInt($('#register').find('img').attr('id').split(',')[1]);
-        //     let rate;
-        //     catalog.find(o => {
-        //         if (o.id === filmClickId) {
-        //             if (!ratingData.find(e => {
-        //                 if (e.id === filmClickId) {
-        //                     e.rate++;
-        //                     return true;
-        //                 }
-        //             })) {
-        //                 if (type === 'characters')
-        //                     rate = new RatingData(type, o.name, o.id, 1);
-        //                 else
-        //                     rate = new RatingData(type, o.title, o.id, 1);
-        //                 ratingData.push(rate);
-        //             }
-        //         }
-        //     });
-        //     userList.find(o => {
-        //         if (o.name === userName) {
-        //             if (type === 'characters')
-        //                 o.selectedCharacterId = filmClickId;
-        //             else
-        //                 o.selectedComicId = filmClickId;
-        //         }
-        //     });
-        //     localStorage.setItem('ratingData', JSON.stringify(ratingData));
-        //     localStorage.setItem('userList', JSON.stringify(userList));
-        //     alert('Thanks for participate. You will be redirect in a few.');
-        //     setTimeout(function () {
-        //         window.location.href = "pages/movieDetails.html";
-        //     }, 2000);
-        // }
+        function resize() {
+            var n = $("body").width() / 17 + "pt";
+            $("h1").css('fontSize', n);
+        }
+        $(window).on("resize", resize);
+        $(document).ready(resize);
     });

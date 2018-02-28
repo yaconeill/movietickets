@@ -324,6 +324,14 @@ $(document).ready(function () {
         $sala.attr('viewBox', `${prevVB[0]} ${prevVB[1]} ${prevVB[2]} ${prevVB[3]}`);
     }
     //#endregion
+
+    function resize() {
+        var n = $("body").width() / 17 + "pt";
+        $("h1").css('fontSize', n);
+    }
+    $(window).on("resize", resize);
+    $(document).ready(resize);
+
     function loadData() {
         userList = JSON.parse(localStorage.getItem('userList'));
         if (userList == null)
