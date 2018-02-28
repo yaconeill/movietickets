@@ -8,12 +8,12 @@ $(this).removeClass('noSelected').addClass('unavailable');});var newUser=new Use
         alt="${tmpFilm.title}" id="${tmpFilm.id}"/>`));$('.details').append(`
     <h2>Detalles</h2>    
     <div class="row">
-        <div class="col-sm-5">
+        <div class="col-6 col-sm-5">
             <p>Película</p>
             <p>Fecha</p>
             <p>Función</p>
         </div>
-        <div class="col-sm-7">
+        <div class="col-6 col-sm-7">
             <p>${tmpFilm.title}</p>
             <p>${selectedFilm.dayWeek} ${selectedFilm.day}</p>
             <p>${selectedFilm.hour}</p>

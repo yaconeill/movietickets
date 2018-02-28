@@ -18,13 +18,13 @@ $(document).ready(function(){RatingData=function(type,name,id,rate){this.type=ty
                         <span class="badge badge-dark">${e.duration}</span>`);e.genre.split(',').forEach(function(e){modal.find('.filmDetails').append(`
                         <span class="badge badge-danger">${e}</span>`)});modal.find('.filmDetails').append(`
                         <div class="row">
-                            <div class="col-sm-2">
+                            <div class="col-3 col-sm-2">
                                 <p>Título</p>
                                 <p>País</p>
                                 <p>Estudio</p>
                                 <p>Reparto</p>
                             </div>
-                            <div class="col-sm-10">
+                            <div class="col-9 col-sm-10">
                                 <p>${e.title}</p>
                                 <p>${e.country}</p>
                                 <p>${e.studio}</p>
