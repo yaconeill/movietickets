@@ -11,7 +11,6 @@
         crossorigin="anonymous">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
-    <script src="https://yoannmoinet.github.io/nipplejs/javascripts/nipplejs.js"></script>
     <script src="../js/qrcode.min.js"></script>
 </head>
 
@@ -41,6 +40,12 @@
     </nav>
     <div class="container">
         <div class="jumbotron">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="../index.html">Inicio</a>
+                </li>
+                <li class="breadcrumb-item active">Detalles</li>
+            </ol>
             <h2 role="heading" aria-level="1" class="display-6 title">COMPRA Y RESERVA TUS ENTRADAS</h2>
             <hr class="my-4">
             <div class="row">
@@ -89,15 +94,15 @@
                                     <div class="error"></div>
                                     <div class="row text-center">
                                         <div class="col-sm-10 col-xs-10 mx-auto">
-                                            <div class="row text-center ml-5">
-                                                <div class="col">CANTIDAD:</div>
-                                                <div class="col">PRECIO:</div>
-                                                <div class="col">SUBTOTAL:</div>
+                                            <div class="row txt text-center">
+                                                <div class="col-3 mx-auto">CANTIDAD:</div>
+                                                <div class="col-2 mx-auto">PRECIO:</div>
+                                                <div class="col-2 mx-auto">SUBT.:</div>
                                             </div>
                                         </div>
                                         <div class="col-sm-10 col-xs-10 mx-auto entradas">
                                             <div class="row">
-                                                <div class="col-5 adult">
+                                                <div class="col-6 col-md-5 adult">
                                                     <div class="col mx-auto">
                                                         <span>ADULTO</span>
                                                     </div>
@@ -113,7 +118,7 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-5 young">
+                                                <div class="col-6 col-md-5 young">
                                                     <div class="col">
                                                         <span>JOVEN</span>
                                                     </div>
@@ -129,7 +134,7 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-5 child">
+                                                <div class="col-6 col-md-5 child">
                                                     <div class="col">
                                                         <span>NIÑO</span>
                                                     </div>
@@ -145,7 +150,7 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-5 senior">
+                                                <div class="col-6 col-md-5 senior">
                                                     <div class="col">
                                                         <span>SENIOR</span>
                                                     </div>
@@ -164,7 +169,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-xs-2 mx-auto">
-                                            <button type="button" class="btn btn-success" id="next">Elige un lugar</button>
+                                            <button type="button" class="btn btn-success btn-sm" id="next">Elige un lugar</button>
                                         </div>
                                     </div>
                                 </div>
@@ -174,9 +179,10 @@
                                             <div class="col-md-10 mx-auto">
                                                 <h5 class="text-center">Selecciona tus butacas</h5>
                                                 <p>Para cambiar tu lugar asignado da click en el butaca deseada.</p>
+                                                <div class="errorSeat"></div>
                                                 <div class="row">
                                                     <div class="col-md-10 mx-auto">
-                                                        <svg width="450" height="30" id="legend" viewBox="450 140 2000 150">
+                                                        <svg width="100%" height="30" id="legend" viewBox="450 140 2000 150">
                                                             <use class="selected" y="150" x="600" width="128" height="128" xlink:href="#butaca" />
                                                             <text style="transform:scale(4);" class="svgText" x="190" y="55" fill="#000">Su butaca</text>
                                                             <use class="noSelected" data-butaca="" y="150" x="1200" width="128" height="128" xlink:href="#butaca" />
@@ -536,12 +542,50 @@
                                             </g>
 
                                         </svg>
-                                        <button type="button" id="resetSala" class="btn btn-info">Reiniciar zoom</button>
-                                        <input type="range" class="slider" name="zoom" id="zoom" min="1000" step="100" max="2600" value="2600">
-                                        <div id="zone_joystick"></div>
+                                        <p class="text-center">
+                                            <a class="btn btn-primary btn-sm" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                                Opciones de zoom
+                                            </a>
+                                        </p>
+                                        <div class="collapse" id="collapseExample">
+                                            <div class="card card-block">
+                                                <div class="row">
+                                                    <div class="col-5">
+                                                        <button type="button" id="resetSala" class="btn btn-info btn-sm">Reiniciar</button>
+                                                    </div>
+                                                    <div class="col-6 col-md-5 mx-auto">
+                                                        <input type="range" class="slider align-bottom" name="zoom" id="zoom" min="1000" step="100" max="2600" value="2600">
+                                                    </div>
+                                                    <div class="col-10 col-md-9 btnZoomCol mx-auto">
+                                                        <div class="row">
+                                                            <div class="col-md-12 text-center">
+                                                                <a class="btnMoveXY btn btn-outline-black btn-sm" data-zoom="down">
+                                                                    <img src="../resources/svg/caret-top.svg">
+                                                                </a>
+                                                            </div>
+                                                            <div class="col-6 text-center">
+                                                                <a class="btnMoveXY btn btn-outline-black btn-sm" data-zoom="left">
+                                                                    <img src="../resources/svg/caret-left.svg">
+                                                                </a>
+                                                            </div>
+                                                            <div class="col-6 text-center">
+                                                                <a class="btnMoveXY btn btn-outline-black btn-sm" data-zoom="right">
+                                                                    <img src="../resources/svg/caret-right.svg">
+                                                                </a>
+                                                            </div>
+                                                            <div class="col text-center">
+                                                                <a class="btnMoveXY btn btn-outline-black btn-sm" data-zoom="up">
+                                                                    <img src="../resources/svg/caret-bottom.svg">
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="text-center mt-3">
-                                            <button type="button" id="goBackTickets" class="btn btn-dark">Volver</button>
-                                            <button type="button" id="goPay" class="btn btn-success">Haz tu pago</button>
+                                            <button type="button" id="goBackTickets" class="btn btn-dark btn-sm">Volver</button>
+                                            <button type="button" id="goPay" class="btn btn-success btn-sm">Haz tu pago</button>
                                         </div>
                                     </div>
                                 </div>
@@ -612,8 +656,9 @@
                                                                     </select>
                                                                 </div>
                                                             </div>
-                                                            <div class="submit-wrapper">
-                                                                <button class="btn btn-primary" type="submit" id="pay">Pagar</button>
+                                                            <div class="submit-wrapper text-center mt-3">
+                                                                <button type="button" id="goBackSeats" class="btn btn-dark btn-sm">Volver</button>
+                                                                <button class="btn btn-primary btn-sm" type="submit" id="pay">Pagar</button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -659,7 +704,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-5 mx-auto text-center">
+                                                    <div class="col-6 mx-auto text-center">
                                                         <span>TOTAL DE LA COMPRA</span>
                                                         <strong class="payed"></strong>
                                                     </div>

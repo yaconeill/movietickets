@@ -88,7 +88,7 @@ $(document).ready(function () {
                         title = list[i].title.substr(0, 20) + '...';
                     $divMovies.children().find('.card-block').eq(i).append(
                         $(`<h4 class="card-header">${title}</h4>
-                        <button type="button" class="btn btn-elegant" data-toggle="modal" 
+                        <button type="button" class="btn btn-elegant btn-sm" data-toggle="modal" 
                         data-target="#details" data-card="com-${list[i].id}">Más info</button>`));
                 }
             } else {
@@ -295,10 +295,5 @@ $(document).ready(function () {
             //     userName = localStorage.getItem('currentUser');
             // vote();
         });
-        function resize() {
-            var n = $("body").width() / 17 + "pt";
-            $("h1").css('fontSize', n);
-        }
-        $(window).on("resize", resize);
-        $(document).ready(resize);
+
     });

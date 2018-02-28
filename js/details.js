@@ -29,16 +29,29 @@ $(document).ready(function () {
     var $moviePoster = $('#moviePoster');
     var tmpFilm;
     var title;
+    let unAvailable = [];
+
     movieList.find(o => {
         if (o.id === selectedFilm.id) {
             tmpFilm = o;
             title = o.title;
+            for (let i = 0; i < o.sold[selectedFilm.dayWeek].length; i++)
+                if (o.sold[selectedFilm.dayWeek][i].day === selectedFilm.day &&
+                    o.sold[selectedFilm.dayWeek][i].hour === selectedFilm.hour)
+                    unAvailable.push(o.sold[selectedFilm.dayWeek][i].seats);
         }
     });
 
+    /**
+     * Check seats unavailable
+     */
     $('#sala use').each(function (idx, e) {
-        if ($(this).hasClass('selected'))
-            numSelected++;
+        let row = parseInt($(this).parent().attr('id').split('w').slice(-1)[0]);
+        let seat = $(this).data('butaca');
+        for (let i = 0; i < unAvailable.length; i++)
+            for (let j = 0; j < unAvailable[i].length; j++)
+                if (unAvailable[i][j].row === row && unAvailable[i][j].seat === seat)
+                    $(this).removeClass('noSelected').addClass('unavailable');
     });
 
     // localStorage.removeItem('userListTmp');
@@ -114,14 +127,18 @@ $(document).ready(function () {
     var $nextBtn = $('#next');
     $nextBtn.hide();
     $nextBtn.on('click', function () {
+        $('#sala use').each(function (idx, e) {
+            if ($(this).hasClass('selected'))
+                $(this).removeClass('selected').addClass('noSelected');
+        });
         let tickets = 0;
         $('.amount').each(function () {
             tickets += parseInt($(this).text());
         });
         if (tickets > 10) {
-            erroMsg('Por favor seleccione como máximo 10 lugares.');
+            erroMsg('Por favor seleccione como máximo 10 lugares.', '.error');
         } else if (tickets === 0) {
-            erroMsg('Por favor seleccione al menos 1.');
+            erroMsg('Por favor seleccione al menos 1.', '.error');
         } else {
             userList.find(e => {
                 if (e.id === localStorage.getItem('currentUser')) {
@@ -132,8 +149,8 @@ $(document).ready(function () {
             $('a[href="#chooseSeat"]').removeClass('disabled').tab('show').addClass('disabled');
         }
     });
-    function erroMsg(text) {
-        let $error = $('.error');
+    function erroMsg(text, node) {
+        let $error = $(node);
         $error.children().remove();
         $error.append(`<div class="alert alert-danger" role="alert">
                             ${text}
@@ -148,7 +165,7 @@ $(document).ready(function () {
 
     var Window = $(window);
     if (Window[0].innerWidth < 768)
-        $sala.attr('height', '250');
+        $sala.attr('height', '190');
     else if (Window[0].innerWidth < 992)
         $sala.attr('height', '300');
     else if (Window[0].innerWidth < 1200)
@@ -158,7 +175,7 @@ $(document).ready(function () {
 
     Window.resize(function () {
         if (Window[0].innerWidth < 768)
-            $sala.attr('height', '250');
+            $sala.attr('height', '190');
         else if (Window[0].innerWidth < 992)
             $sala.attr('height', '300');
         else if (Window[0].innerWidth < 1200)
@@ -168,19 +185,24 @@ $(document).ready(function () {
     });
 
     $sala.find('use').on('click', function () {
-        // userList = loadData();
         let numTickets = userList.find(e => e.id === localStorage.getItem('currentUser')).tickets;
+        let numSelected = numSeatsSelected();
+
+        if ($(this).hasClass('noSelected')) {
+            if (numSelected < numTickets)
+                $(this).removeClass('noSelected').addClass('selected');
+        } else if ($(this).hasClass('selected'))
+            $(this).removeClass('selected').addClass('noSelected');
+    });
+
+    function numSeatsSelected() {
         let numSelected = 0;
         $('#sala use').each(function (idx, e) {
             if ($(this).hasClass('selected'))
                 numSelected++;
         });
-        if ($(this).hasClass('noSelected')) {
-            if (numSelected < numTickets)
-                $(this).removeClass('noSelected').addClass('selected');
-        } else
-            $(this).removeClass('selected').addClass('noSelected');
-    });
+        return numSelected;
+    }
 
     $('g use').hover(function () {
         $(this).css('cursor', 'pointer').attr('title', 'This is a hover text.');
@@ -193,28 +215,77 @@ $(document).ready(function () {
         $zoom.val('2600');
     });
 
+    let $zoom = $('#zoom');
+    $zoom.change(() => {
+        let value = $zoom.val();
+        editViewBox(value, 'zoom')
+    });
+
+    let $btnMoveXY = $('.btnMoveXY');
+    $btnMoveXY.click(function () {
+        switch ($(this).data('zoom')) {
+            case 'up':
+                editViewBox(40, 'move', 'Y')
+                break;
+            case 'down':
+                editViewBox(-40, 'move', 'Y')
+                break;
+            case 'right':
+                editViewBox(40, 'move', 'X')
+                break;
+            case 'left':
+                editViewBox(-40, 'move', 'X')
+                break;
+        }
+    });
+
+    function editViewBox(value, mode, direction) {
+        let prevVB = $sala.attr('viewBox').split(' ');
+        if (mode === 'zoom')
+            prevVB[3] = parseInt(value);
+        else {
+            if (direction === 'Y')
+                prevVB[1] = parseInt(prevVB[1]) + value;
+            else
+                prevVB[0] = parseInt(prevVB[0]) + value;
+        }
+
+        $sala.attr('viewBox', `${prevVB[0]} ${prevVB[1]} ${prevVB[2]} ${prevVB[3]}`);
+    }
+
+    //#endregion
+
     $('#goPay').click(function () {
         let seatSelection = [];
-        // userList = loadData();
-        $('#sala use').each(function (idx, e) {
-            if ($(this).hasClass('selected')) {
-                let seat = $(this).data('butaca');
-                let row = parseInt($(this).parent().attr('id').split('w').slice(-1)[0]);
-                seatSelection.push({ 'seat': seat, 'row': row });
+        let numTickets = userList.find(e => e.id === localStorage.getItem('currentUser')).tickets;
+        let numSelected = numSeatsSelected();
+        if (numSelected === numTickets) {
+            $('#sala use').each(function (idx, e) {
+                if ($(this).hasClass('selected')) {
+                    let seat = $(this).data('butaca');
+                    let row = parseInt($(this).parent().attr('id').split('w').slice(-1)[0]);
+                    seatSelection.push({ 'seat': seat, 'row': row });
+                }
+            });
+            userList.find(e => {
+                if (e.id === localStorage.getItem('currentUser')) {
+                    e.seats = seatSelection;
+                }
+            });
+            $('a[href="#payment"]').removeClass('disabled').tab('show').addClass('disabled');
+        } else {
+            if (numSelected === 0)
+                erroMsg('No has seleccionado ninguna butaca', '.errorSeat');
+            else {
+                let num = numTickets - numSelected;
+                num > 1 ? num += ' butacas' : num += ' butaca'
+                erroMsg(`Te falta seleccionar ${num}`, '.errorSeat');
             }
-        });
-        userList.find(e => {
-            if (e.id === localStorage.getItem('currentUser')) {
-                e.seats = seatSelection;
-            }
-        });
-        // localStorage.setItem('userListTmp', JSON.stringify(userList));
-        $('a[href="#payment"]').removeClass('disabled').tab('show').addClass('disabled');
+        }
     });
 
     $('form').submit(function (e) {
         e.preventDefault();
-        // userList = loadData();
         let text;
         let form = $('#datos_pago').find('input');
         let $showInfo = $('.data');
@@ -225,13 +296,12 @@ $(document).ready(function () {
                 u.name = form[1].value;
                 movieList.find(m => {
                     if (m.id === u.selectedFilmId.id) {
-                        m.sold[u.selectedFilmId.dayWeek] = [{ 'day': u.selectedFilmId.day, 'hour': u.selectedFilmId.hour, 'seats': u.seats }];
-                        // m.sold[u.selectedFilmId.dayWeek].idSeat = ;
+                        m.sold[u.selectedFilmId.dayWeek].push({ 'day': u.selectedFilmId.day, 'hour': u.selectedFilmId.hour, 'seats': u.seats });
                         text = `ID: ${uuidv4()} - ${u.selectedFilmId.dayWeek} ${u.selectedFilmId.day}, ${u.selectedFilmId.hour} `;
                         for (let i = 0; i < u.seats.length; i++) {
                             text += ' || Fila: ' + u.seats[i].row;
                             text += ' Asiento: ' + u.seats[i].seat;
-                        $showInfo.eq(3).find('.butacas').append(`<p>Fila: ${u.seats[i].row} Asiento: ${u.seats[i].seat}</p>`);                            
+                            $showInfo.eq(3).find('.butacas').append(`<p>Fila: ${u.seats[i].row} Asiento: ${u.seats[i].seat}</p>`);
                         }
                         $showInfo.eq(2).find('p').text(m.title);
                     }
@@ -262,75 +332,125 @@ $(document).ready(function () {
         $('a[href="#chooseSeat"]').removeClass('disabled').tab('show').addClass('disabled');
     });
 
-    let $zoom = $('#zoom');
-    $zoom.change(() => {
-        let value = $zoom.val();
-        let prevVB = $sala.attr('viewBox').split(' ');
-        prevVB[3] = parseInt(value);
-        $sala.attr('viewBox', `${prevVB[0]} ${prevVB[1]} ${prevVB[2]} ${prevVB[3]}`);
-    });
+    // var s = function (sel) {
+    //     return document.querySelector(sel);
+    // };
 
-    var s = function (sel) {
-        return document.querySelector(sel);
-    };
+    // var radius = 100;
+    // var sampleJoystick = {
+    //     zone: s('#zone_joystick'),
+    //     mode: 'static',
+    //     position: {
+    //         left: '112%',
+    //         top: '90%'
+    //     },
+    //     color: 'black'
+    // };
 
-    var radius = 100;
-    var sampleJoystick = {
-        zone: s('#zone_joystick'),
-        mode: 'static',
-        position: {
-            left: '112%',
-            top: '90%'
-        },
-        color: 'black'
-    };
+    // var joystick;
+    // var position;
+    // joystick = nipplejs.create(sampleJoystick);
+    // joystick.on('start end', function (evt, data) {
+    //     position = data;
+    // }).on('move', function (evt, data) {
+    //     position = data;
+    //     moveAround(position);
+    // }).on('dir:up plain:up dir:left plain:left dir:down' +
+    //     'plain:down dir:right plain:right',
+    //     function (evt, data) {
+    //         position = data;
+    //     }
+    // ).on('pressure', function (evt, data) {
+    //     position = data;
 
-    var joystick;
-    var position;
-    joystick = nipplejs.create(sampleJoystick);
-    joystick.on('start end', function (evt, data) {
-        position = data;
-    }).on('move', function (evt, data) {
-        position = data;
-        moveAround(position);
-    }).on('dir:up plain:up dir:left plain:left dir:down' +
-        'plain:down dir:right plain:right',
-        function (evt, data) {
-            position = data;
-        }
-    ).on('pressure', function (evt, data) {
-        position = data;
+    // });
 
-    });
+    // function moveAround(data) {
+    //     let prevVB = $sala.attr('viewBox').split(' ');
+    //     let valueX = 0;
+    //     let valueY = 0;
+    //     if (data.direction !== undefined) {
+    //         if (data.direction.x === 'right') {
+    //             valueX = +10;
+    //         } else {
+    //             valueX = 10;
+    //         }
+    //         if (data.direction.y === 'up') {
+    //             valueY = 10;
+    //         } else {
+    //             valueY = +10;
+    //         }
+    //     }
+    //     prevVB[0] = parseInt(prevVB[0]) + valueX;
+    //     prevVB[1] = parseInt(prevVB[1]) + valueY;
+    //     $sala.attr('viewBox', `${prevVB[0]} ${prevVB[1]} ${prevVB[2]} ${prevVB[3]}`);
+    // }
 
-    function moveAround(data) {
-        let prevVB = $sala.attr('viewBox').split(' ');
-        let valueX = 0;
-        let valueY = 0;
-        if (data.direction !== undefined) {
-            if (data.direction.x === 'right') {
-                valueX = 10;
-            } else {
-                valueX = -10;
-            }
-            if (data.direction.y === 'up') {
-                valueY = -10;
-            } else {
-                valueY = 10;
-            }
-        }
-        prevVB[0] = parseInt(prevVB[0]) + valueX;
-        prevVB[1] = parseInt(prevVB[1]) + valueY;
-        $sala.attr('viewBox', `${prevVB[0]} ${prevVB[1]} ${prevVB[2]} ${prevVB[3]}`);
-    }
+
+
+    // init();
+    // function init() {
+    //     var sala = document.getElementById("sala");
+    //     if (sala) {
+    // sala.addEventListener("mousedown", mouseDown, false);
+    // sala.addEventListener("mouseup", mouseUp, false);
+    //     }
+    // }
+
+    // // function mouseDown(evt) {
+    //     sala.addEventListener("mousemove", mouseMove, false);
+    // // }
+
+    // function mouseUp(evt) {
+    //     var mousex = evt.clientX;
+    //     var mousey = evt.clientY;
+    //     console.log(mousex,mousey);
+    // }
+
+    // function mouseMove(evt) {
+    //     sala.addEventListener("mousedown", (data) => {
+    //         moveAround(data, evt);
+    //     }, false);
+    // }
+
+    // function moveAround(data, evt) {
+    //     let prevVB = $sala.attr('viewBox').split(' ');
+    //     let valueX = 0;
+    //     let valueY = 0;
+    //     // if (data.clientX !== undefined) {
+    //         if (data.movementX > 0) {
+    //             valueX = 5;
+    //         } else {
+    //             valueX = -5;
+    //         }
+    //         if (data.movementY > 0) {
+    //             valueY = 5;
+    //         } else {
+    //             valueY = -5;
+    //         }
+    //     // }
+    //     prevVB[0] = parseInt(prevVB[0]) + valueX;
+    //     prevVB[1] = parseInt(prevVB[1]) + valueY;
+    //     $sala.attr('viewBox', `${prevVB[0]} ${prevVB[1]} ${prevVB[2]} ${prevVB[3]}`);
+    // }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     //#endregion
-
-    function resize() {
-        var n = $("body").width() / 17 + "pt";
-        $("h1").css('fontSize', n);
-    }
-    $(window).on("resize", resize);
-    $(document).ready(resize);
 
     function loadData() {
         userList = JSON.parse(localStorage.getItem('userList'));
