@@ -101,6 +101,12 @@ body {
     .card-header {
         font-size: 1em;
     }
+    .card-header {
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 }
 
 #graphic {
