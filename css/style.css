@@ -178,12 +178,11 @@ a.disabled {
     margin-right: .5em; }
 
 .footer {
-  position: fixed;
   font-size: 1.8vmin;
   left: 0;
   bottom: 0;
   width: 100%;
-  background-color: #d9230f;
+  background-color: #1a1a1a;
   color: white;
   text-align: center;
   padding: 10px; }
